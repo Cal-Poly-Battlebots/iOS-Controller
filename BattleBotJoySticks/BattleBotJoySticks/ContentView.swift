@@ -8,55 +8,55 @@
 import SwiftUI
 
 struct SwipeGestureView: View {
-    @Binding var joystickPosition: CGPoint
-    @Binding var joyStickMagnitude: CGFloat
-    @Binding var joyStickAngleDegrees: CGFloat
+    @Binding var swipePosition: CGPoint
+    @Binding var swipeMagnitude: CGFloat
+    @Binding var swipeAngleDegrees: CGFloat
 
     var body: some View {
-        VStack {
-            RoundedRectangle(cornerRadius: 10)
-                .frame(width: 200, height: 200)
+        ZStack {
+            Color.clear // Use a clear background to cover the entire screen
+                .contentShape(Rectangle())
+                .frame(width: 500, height: 500) // Adjust as needed
                 .gesture(
                     DragGesture(minimumDistance: 0)
                         .onChanged { value in
-                            // Update joystick position based on drag gesture
-                            joystickPosition = value.location
+                            // Update swipe position based on drag gesture
+                            swipePosition = value.startLocation
                             // Calculate magnitude and angle
-                            let xAxisValue = joystickPosition.x - 100
-                            let yAxisValue = joystickPosition.y - 100
-                            joyStickMagnitude = min(sqrt(pow(xAxisValue, 2) + pow(yAxisValue, 2)), 50.0)
-                            joyStickAngleDegrees = (360 + atan2(xAxisValue, -yAxisValue) * 180 / .pi).truncatingRemainder(dividingBy: 360)
+                            let xAxisValue = value.translation.width
+                            let yAxisValue = value.translation.height
+                            swipeMagnitude = min(sqrt(pow(xAxisValue, 2) + pow(yAxisValue, 2)), 50.0)
+                            swipeAngleDegrees = (360 + atan2(xAxisValue, -yAxisValue) * 180 / .pi).truncatingRemainder(dividingBy: 360)
                             // Send data to Bluetooth
-                            let dataToSend = "\(joyStickAngleDegrees),\(joyStickMagnitude)"
+                            let dataToSend = "\(swipeAngleDegrees),\(swipeMagnitude)"
                             BluetoothManager.shared.sendData(dataToSend, BluetoothManager.swipe_uuid)
                         }
                         .onEnded { _ in
-                            // Reset joystick position when gesture ends
-                            joystickPosition = .zero
-                            joyStickMagnitude = 0.0
-                            joyStickAngleDegrees = 0.0
+                            // Reset swipe position when gesture ends
+                            swipePosition = .zero
+                            swipeMagnitude = 0.0
+                            swipeAngleDegrees = 0.0
                             // Send data to Bluetooth to stop movement
                             let dataToSend = "0.0,0.0"
                             BluetoothManager.shared.sendData(dataToSend, BluetoothManager.swipe_uuid)
                         }
                 )
+                .background(Color.red.opacity(0.3))
         }
-        
-        Spacer()
-        
-        Text("Swipe Angle: \(joyStickAngleDegrees), Swipe Magnitude: \(joyStickMagnitude)")
-            .font(.title)
-            .padding()
+        .edgesIgnoringSafeArea(.all) // Make the overlay cover the entire screen
     }
 }
 
 struct ContentView: View {
     @State private var joystickPosition: CGPoint = .zero
+    @State private var swipePosition: CGPoint = .zero
     @State private var xAxisValue: CGFloat = 0.0
     @State private var yAxisValue: CGFloat = 0.0
     @State private var joyStickAngle: CGFloat = 0.0
     @State private var joyStickMagnitude: CGFloat = 0.0
     @State private var joyStickAngleDegrees: CGFloat = 0.0
+    @State private var swipeAngleDegrees: CGFloat = 0.0
+    @State private var swipeMagnitude: CGFloat = 0.0
     @State private var abilityBars: [Bool] = Array(repeating: false, count: 10)
     @State private var timer: Timer?
 
@@ -85,6 +85,11 @@ struct ContentView: View {
                 JoystickView(joystickPosition: $joystickPosition)
                     .frame(width: 100, height: 100) // Adjust the size as needed
                     .position(x: 170, y: geometry.size.height - 200)
+                
+                // SwipeGestureView
+                SwipeGestureView(swipePosition: $swipePosition, swipeMagnitude: $swipeMagnitude, swipeAngleDegrees: $swipeAngleDegrees)
+                    .frame(width: 200, height: 200)
+                    .position(x: geometry.size.width - 255, y: geometry.size.height - 350)
 
                 // Upper-right corner items
                 HStack {
@@ -105,8 +110,15 @@ struct ContentView: View {
             }
 
             Text("Joystick Angle: \(joyStickAngleDegrees), Magnitude: \(joyStickMagnitude)")
-                .font(.title)
-                .padding()
+            .font(.title)
+            .padding()
+            
+            
+            Text("Swipe Angle: \(swipeAngleDegrees), Swipe Magnitude: \(swipeMagnitude)")
+            .padding()
+            .padding()
+            .font(.title)
+            .padding()
         }
         .navigationBarTitle("BattleBot")
         .onAppear {
