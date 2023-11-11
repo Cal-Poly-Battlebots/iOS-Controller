@@ -16,7 +16,7 @@ struct SwipeGestureView: View {
         ZStack {
             Color.clear // Use a clear background to cover the entire screen
                 .contentShape(Rectangle())
-                .frame(width: 500, height: 500) // Adjust as needed
+                .frame(width: UIScreen.main.bounds.width / 2, height: UIScreen.main.bounds.width / 2)
                 .gesture(
                     DragGesture(minimumDistance: 0)
                         .onChanged { value in
@@ -25,7 +25,7 @@ struct SwipeGestureView: View {
                             // Calculate magnitude and angle
                             let xAxisValue = value.translation.width
                             let yAxisValue = value.translation.height
-                            swipeMagnitude = min(sqrt(pow(xAxisValue, 2) + pow(yAxisValue, 2)), 50.0)
+                            swipeMagnitude = min(sqrt(pow(xAxisValue / 5, 2) + pow(yAxisValue / 5, 2)), 50.0)
                             swipeAngleDegrees = (360 + atan2(xAxisValue, -yAxisValue) * 180 / .pi).truncatingRemainder(dividingBy: 360)
                             // Send data to Bluetooth
                             let dataToSend = "\(swipeAngleDegrees),\(swipeMagnitude)"
@@ -41,7 +41,7 @@ struct SwipeGestureView: View {
                             BluetoothManager.shared.sendData(dataToSend, BluetoothManager.swipe_uuid)
                         }
                 )
-                .background(Color.red.opacity(0.3))
+                .background(Color.indigo.opacity(0.2))
         }
         .edgesIgnoringSafeArea(.all) // Make the overlay cover the entire screen
     }
@@ -88,8 +88,9 @@ struct ContentView: View {
                 
                 // SwipeGestureView
                 SwipeGestureView(swipePosition: $swipePosition, swipeMagnitude: $swipeMagnitude, swipeAngleDegrees: $swipeAngleDegrees)
-                    .frame(width: 200, height: 200)
-                    .position(x: geometry.size.width - 255, y: geometry.size.height - 350)
+                    .frame(width: geometry.size.width / 2, height: geometry.size.height) // Takes up the right half of the screen
+                    .position(x: geometry.size.width * 0.75, y: geometry.size.height / 2) // Centered vertically on the right side
+
 
                 // Upper-right corner items
                 HStack {
@@ -98,10 +99,12 @@ struct ContentView: View {
                         HStack { // Place the Image and Text horizontally
                             Image(systemName: "globe")
                                 .imageScale(.small)
+                                .offset(x: 0, y:20)
                                 .foregroundStyle(.tint)
                                 .frame(width: 30, height: 30) // Adjust the size as needed
                             Text("BattleBot App")
                                 .padding(.trailing, 20) // Add padding to the right
+                                .offset(x: 0, y:20)
                         }
                     }
                     Spacer() // Push items to the top
@@ -119,6 +122,7 @@ struct ContentView: View {
             .padding()
             .font(.title)
             .padding()
+            .offset(x: -32)
         }
         .navigationBarTitle("BattleBot")
         .onAppear {
@@ -131,10 +135,10 @@ struct ContentView: View {
                 joyStickMagnitude = sqrt(pow(xAxisValue, 2) + pow(yAxisValue, 2))
                 
                 // Calculate angle in radians
-                joyStickAngle = atan2(xAxisValue, -yAxisValue)
+                joyStickAngle = atan2(yAxisValue, xAxisValue)
                 
                 // Convert radians to degrees (0-360, clockwise)
-                joyStickAngleDegrees = (360 - joyStickAngle * 180 / .pi).truncatingRemainder(dividingBy: 360)
+                joyStickAngleDegrees = (90 + joyStickAngle * 180 / .pi).truncatingRemainder(dividingBy: 360)
                 
                 // Send data to Bluetooth on the main thread
                 DispatchQueue.main.async {
