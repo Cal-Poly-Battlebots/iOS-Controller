@@ -11,12 +11,12 @@ import CoreBluetooth
 class BluetoothManager: NSObject, ObservableObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     
     // Declare the ESP32 device name as a constant
-    private let esp32DeviceName = "YourESP32DeviceName"
+    private let esp32DeviceName = "ESP32_BLE"
     
     // 3 Bluetooth characteristic UUIDs
-    public static let joystick_uuid = "joystick_vector"
-    public static let swipe_uuid = "swipe_vector"
-    public static let ability_uuid = "ability_bar"
+    public static let joystick_uuid = "6E400002-B5A3-F393-E0A9-E50E24DCCA9E"
+    public static let swipe_uuid = "6E400003-B5A3-F393-E0A9-E50E24DCCA9E"
+    public static let ability_uuid = "6E400004-B5A3-F393-E0A9-E50E24DCCA9E"
     
     @Published var peripheral: CBPeripheral?
     var centralManager: CBCentralManager!
