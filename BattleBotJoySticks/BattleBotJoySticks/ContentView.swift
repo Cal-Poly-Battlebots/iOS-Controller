@@ -28,9 +28,9 @@ struct SwipeGestureView: View {
                             swipeMagnitude = min(sqrt(pow(xAxisValue / 5, 2) + pow(yAxisValue / 5, 2)), 50.0)
                             
                             let swipeAngle = atan2(yAxisValue, xAxisValue)
-                            swipeAngleDegrees = (90 + swipeAngle * 180 / .pi).truncatingRemainder(dividingBy: 360)
+                            swipeAngleDegrees = (270 + 180 + swipeAngle * 180 / .pi).truncatingRemainder(dividingBy: 360)
                             // Send data to Bluetooth
-                            let dataToSend = "\(swipeAngleDegrees),\(swipeMagnitude)"
+                            let dataToSend = "\(swipeAngleDegrees),\(swipeMagnitude)\n"
                             BluetoothManager.shared.sendData(dataToSend, BluetoothManager.swipe_uuid)
                         }
                         .onEnded { _ in
@@ -39,7 +39,7 @@ struct SwipeGestureView: View {
                             swipeMagnitude = 0.0
                             swipeAngleDegrees = 0.0
                             // Send data to Bluetooth to stop movement
-                            let dataToSend = "0.0,0.0"
+                            let dataToSend = "0.0,0.0\n"
                             BluetoothManager.shared.sendData(dataToSend, BluetoothManager.swipe_uuid)
                         }
                 )
@@ -140,11 +140,11 @@ struct ContentView: View {
                 joyStickAngle = atan2(yAxisValue, xAxisValue)
                 
                 // Convert radians to degrees (0-360, clockwise)
-                joyStickAngleDegrees = (90 + joyStickAngle * 180 / .pi).truncatingRemainder(dividingBy: 360)
+                joyStickAngleDegrees = (270 + 180 + joyStickAngle * 180 / .pi).truncatingRemainder(dividingBy: 360)
                 
                 // Send data to Bluetooth on the main thread
                 DispatchQueue.main.async {
-                    let dataToSend = "\(joyStickAngleDegrees),\(joyStickMagnitude)"
+                    let dataToSend = "\(joyStickAngleDegrees),\(joyStickMagnitude)\n"
                     BluetoothManager.shared.sendData(dataToSend, BluetoothManager.joystick_uuid)
                 }
             }
