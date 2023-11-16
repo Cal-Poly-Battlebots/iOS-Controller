@@ -9,12 +9,14 @@
 /* Begin PBXBuildFile section */
 		07985ABE2AFCC87D007E298B /* BluetoothManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07985ABD2AFCC87D007E298B /* BluetoothManager.swift */; };
 		07E816682AC9684A002D1724 /* BattleBotJoySticksApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E816672AC9684A002D1724 /* BattleBotJoySticksApp.swift */; };
-		07E8166A2AC9684A002D1724 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E816692AC9684A002D1724 /* ContentView.swift */; };
 		07E8166C2AC9684B002D1724 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07E8166B2AC9684B002D1724 /* Assets.xcassets */; };
 		07E8166F2AC9684B002D1724 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07E8166E2AC9684B002D1724 /* Preview Assets.xcassets */; };
 		07E816792AC9684C002D1724 /* BattleBotJoySticksTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E816782AC9684C002D1724 /* BattleBotJoySticksTests.swift */; };
 		07E816832AC9684C002D1724 /* BattleBotJoySticksUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E816822AC9684C002D1724 /* BattleBotJoySticksUITests.swift */; };
 		07E816852AC9684C002D1724 /* BattleBotJoySticksUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E816842AC9684C002D1724 /* BattleBotJoySticksUITestsLaunchTests.swift */; };
+		89D8185E2B06B43E00426437 /* ModeSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D8185D2B06B43E00426437 /* ModeSelectorView.swift */; };
+		89D818602B06B48E00426437 /* GestureModeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D8185F2B06B48E00426437 /* GestureModeView.swift */; };
+		89D818642B06BCD700426437 /* JoystickModeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D818632B06BCD700426437 /* JoystickModeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,7 +40,6 @@
 		07985ABD2AFCC87D007E298B /* BluetoothManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothManager.swift; sourceTree = "<group>"; };
 		07E816642AC9684A002D1724 /* BattleBotJoySticks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BattleBotJoySticks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		07E816672AC9684A002D1724 /* BattleBotJoySticksApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BattleBotJoySticksApp.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
-		07E816692AC9684A002D1724 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		07E8166B2AC9684B002D1724 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		07E8166E2AC9684B002D1724 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		07E816742AC9684C002D1724 /* BattleBotJoySticksTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BattleBotJoySticksTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -46,6 +47,9 @@
 		07E8167E2AC9684C002D1724 /* BattleBotJoySticksUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BattleBotJoySticksUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		07E816822AC9684C002D1724 /* BattleBotJoySticksUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BattleBotJoySticksUITests.swift; sourceTree = "<group>"; };
 		07E816842AC9684C002D1724 /* BattleBotJoySticksUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BattleBotJoySticksUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		89D8185D2B06B43E00426437 /* ModeSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModeSelectorView.swift; sourceTree = "<group>"; };
+		89D8185F2B06B48E00426437 /* GestureModeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GestureModeView.swift; sourceTree = "<group>"; };
+		89D818632B06BCD700426437 /* JoystickModeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoystickModeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,10 +101,12 @@
 			isa = PBXGroup;
 			children = (
 				07E816672AC9684A002D1724 /* BattleBotJoySticksApp.swift */,
-				07E816692AC9684A002D1724 /* ContentView.swift */,
+				89D8185D2B06B43E00426437 /* ModeSelectorView.swift */,
+				89D818632B06BCD700426437 /* JoystickModeView.swift */,
 				07E8166B2AC9684B002D1724 /* Assets.xcassets */,
 				07E8166D2AC9684B002D1724 /* Preview Content */,
 				07985ABD2AFCC87D007E298B /* BluetoothManager.swift */,
+				89D8185F2B06B48E00426437 /* GestureModeView.swift */,
 			);
 			path = BattleBotJoySticks;
 			sourceTree = "<group>";
@@ -260,9 +266,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				07E8166A2AC9684A002D1724 /* ContentView.swift in Sources */,
+				89D8185E2B06B43E00426437 /* ModeSelectorView.swift in Sources */,
 				07985ABE2AFCC87D007E298B /* BluetoothManager.swift in Sources */,
+				89D818642B06BCD700426437 /* JoystickModeView.swift in Sources */,
 				07E816682AC9684A002D1724 /* BattleBotJoySticksApp.swift in Sources */,
+				89D818602B06B48E00426437 /* GestureModeView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -426,7 +434,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"BattleBotJoySticks/Preview Content\"";
-				DEVELOPMENT_TEAM = X6YP4ZNVV7;
+				DEVELOPMENT_TEAM = EHT5EF5CQZ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "We need Bluetooth to discover and connect to nearby devices";
@@ -440,7 +448,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.gmail.minecraftandmoar.BattleBotJoySticks;
+				PRODUCT_BUNDLE_IDENTIFIER = com.KieranHomeLabs.BattleBotJoySticks;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -456,7 +464,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"BattleBotJoySticks/Preview Content\"";
-				DEVELOPMENT_TEAM = X6YP4ZNVV7;
+				DEVELOPMENT_TEAM = EHT5EF5CQZ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "We need Bluetooth to discover and connect to nearby devices";
@@ -470,7 +478,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.gmail.minecraftandmoar.BattleBotJoySticks;
+				PRODUCT_BUNDLE_IDENTIFIER = com.KieranHomeLabs.BattleBotJoySticks;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

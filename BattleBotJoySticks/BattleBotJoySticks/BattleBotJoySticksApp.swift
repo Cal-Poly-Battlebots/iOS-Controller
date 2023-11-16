@@ -83,7 +83,7 @@ struct Dash: View {
 struct BattleBotJoySticksApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ModeSelectorView()
         }
     }
 }
