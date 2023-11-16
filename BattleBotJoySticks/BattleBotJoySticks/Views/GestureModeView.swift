@@ -11,10 +11,13 @@ struct GestureModeView: View {
     @State private var currentFacingAngle = Angle(degrees: 0.0)
     @State private var finalFacingAngle = Angle(degrees: 0)
     @State private var dragOffset: CGSize = .zero
+    @State private var directionAngle: Angle = Angle(degrees: 0.0)
+    @State private var speedMagnitude: CGFloat = 0.0
 
     var body: some View {
-        NavigationStack {
             VStack {
+                Divider()
+                    .padding([.leading, .trailing], 30)
                 Spacer() // Pushes the rotating text to the center
                 Text("Musty Bot")
                     .padding(75)
@@ -40,6 +43,8 @@ struct GestureModeView: View {
                             DragGesture()
                                 .onChanged { value in
                                     dragOffset = value.translation
+                                    directionAngle = dragDirection()
+                                    speedMagnitude = dragMagnitude()
                                 }
                                 .onEnded { _ in
                                     dragOffset = .zero
@@ -48,16 +53,15 @@ struct GestureModeView: View {
                     )
                 Spacer() // Pushes the angle text to the bottom
                 Text("Facing Angle: \(finalFacingAngle.degrees)")
-                Text("Drag Angle: \(dragDirection().degrees)")
-                Text("Drag Magnitude: \(dragMagnitude())")
+                Text("Direction Angle: \(dragDirection().degrees)")
+                Text("Speed Magnitude: \(dragMagnitude())")
             }
-            .navigationBarTitle("Rotation and Drag Test")
-        }
+            .navigationBarTitle("Gesture Mode")
     }
 
     private func dragDirection() -> Angle {
         // Calculate the angle with respect to the custom coordinate system
-        var angle = atan2(dragOffset.width, dragOffset.height)
+        var angle = atan2(dragOffset.width, -dragOffset.height)
         // Ensure the angle is positive
         if angle < 0 {
             angle += 2 * .pi
@@ -66,8 +70,16 @@ struct GestureModeView: View {
         return Angle(radians: Double(angle))
     }
 
+
     private func dragMagnitude() -> CGFloat {
-        return sqrt(pow(dragOffset.width, 2) + pow(dragOffset.height, 2))
+        let originalMagnitude = sqrt(pow(dragOffset.width, 2) + pow(dragOffset.height, 2))
+        let maxOriginalValue = CGFloat(200) // Replace with your actual max original value
+
+        // Nominalize the magnitude
+        let normalizedMagnitude = (originalMagnitude / maxOriginalValue) * CGFloat(50)
+        let cappedMagnitude = min(normalizedMagnitude, 50)
+
+        return cappedMagnitude
     }
 }
 

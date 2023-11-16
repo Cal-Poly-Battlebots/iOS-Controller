@@ -51,14 +51,14 @@ struct SwipeGestureView: View {
 
 struct JoystickModeView: View {
     @State private var joystickPosition: CGPoint = .zero
-    @State private var swipePosition: CGPoint = .zero
     @State private var xAxisValue: CGFloat = 0.0
     @State private var yAxisValue: CGFloat = 0.0
     @State private var joyStickAngle: CGFloat = 0.0
     @State private var joyStickMagnitude: CGFloat = 0.0
     @State private var joyStickAngleDegrees: CGFloat = 0.0
-    @State private var swipeAngleDegrees: CGFloat = 0.0
+    @State private var swipePosition: CGPoint = .zero
     @State private var swipeMagnitude: CGFloat = 0.0
+    @State private var swipeAngleDegrees: CGFloat = 0.0
     @State private var abilityBars: [Bool] = Array(repeating: false, count: 10)
     @State private var timer: Timer?
 
@@ -88,30 +88,11 @@ struct JoystickModeView: View {
                     .frame(width: 100, height: 100) // Adjust the size as needed
                     .position(x: 170, y: geometry.size.height - 200)
                 
-                // SwipeGestureView
+                // SwipeView
                 SwipeGestureView(swipePosition: $swipePosition, swipeMagnitude: $swipeMagnitude, swipeAngleDegrees: $swipeAngleDegrees)
                     .frame(width: geometry.size.width / 2, height: geometry.size.height) // Takes up the right half of the screen
                     .position(x: geometry.size.width * 0.75, y: geometry.size.height / 2) // Centered vertically on the right side
 
-
-                // Upper-right corner items
-                HStack {
-                    Spacer() // Push items to the right
-                    VStack {
-                        HStack { // Place the Image and Text horizontally
-                            Image(systemName: "globe")
-                                .imageScale(.small)
-                                .offset(x: 0, y:20)
-                                .foregroundStyle(.tint)
-                                .frame(width: 30, height: 30) // Adjust the size as needed
-                            Text("BattleBot App")
-                                .padding(.trailing, 20) // Add padding to the right
-                                .offset(x: 0, y:20)
-                        }
-                    }
-                    Spacer() // Push items to the top
-                }
-                .position(x: geometry.size.width - 70, y: -12) // Adjust position as needed
             }
 
             Text("Joystick Angle: \(joyStickAngleDegrees), Magnitude: \(joyStickMagnitude)")
@@ -126,7 +107,7 @@ struct JoystickModeView: View {
             .padding()
             .offset(x: -32)
         }
-        .navigationBarTitle("BattleBot")
+        .navigationBarTitle("Joystick Mode")
         .onAppear {
             // Start a Timer to update variables as fast as possible
             self.timer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true) { _ in
@@ -154,6 +135,7 @@ struct JoystickModeView: View {
         }
     }
 }
+
 
 struct JoystickModeView_Previews: PreviewProvider {
     static var previews: some View {

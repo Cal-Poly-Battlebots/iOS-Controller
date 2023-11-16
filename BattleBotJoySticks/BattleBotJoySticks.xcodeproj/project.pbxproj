@@ -101,12 +101,10 @@
 			isa = PBXGroup;
 			children = (
 				07E816672AC9684A002D1724 /* BattleBotJoySticksApp.swift */,
-				89D8185D2B06B43E00426437 /* ModeSelectorView.swift */,
-				89D818632B06BCD700426437 /* JoystickModeView.swift */,
+				89D8186B2B06C91400426437 /* Views */,
 				07E8166B2AC9684B002D1724 /* Assets.xcassets */,
 				07E8166D2AC9684B002D1724 /* Preview Content */,
 				07985ABD2AFCC87D007E298B /* BluetoothManager.swift */,
-				89D8185F2B06B48E00426437 /* GestureModeView.swift */,
 			);
 			path = BattleBotJoySticks;
 			sourceTree = "<group>";
@@ -134,6 +132,16 @@
 				07E816842AC9684C002D1724 /* BattleBotJoySticksUITestsLaunchTests.swift */,
 			);
 			path = BattleBotJoySticksUITests;
+			sourceTree = "<group>";
+		};
+		89D8186B2B06C91400426437 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				89D8185F2B06B48E00426437 /* GestureModeView.swift */,
+				89D8185D2B06B43E00426437 /* ModeSelectorView.swift */,
+				89D818632B06BCD700426437 /* JoystickModeView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
