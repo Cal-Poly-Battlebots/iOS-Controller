@@ -14,9 +14,13 @@ class BluetoothManager: NSObject, ObservableObject, CBCentralManagerDelegate, CB
     private let esp32DeviceName = "ESP32_BLE"
     
     // 3 Bluetooth characteristic UUIDs
-    public static let joystick_uuid = "6E400002-B5A3-F393-E0A9-E50E24DCCA9E"
-    public static let swipe_uuid = "6E400003-B5A3-F393-E0A9-E50E24DCCA9E"
-    public static let ability_uuid = "6E400004-B5A3-F393-E0A9-E50E24DCCA9E"
+    public let service_uuid = CBUUID(string: "6E400001-B5A3-F393-E0A9-E50E24DCCA9E")
+    public static let joystick_uuid = CBUUID(string: "6E400002-B5A3-F393-E0A9-E50E24DCCA9E")
+    public static let swipe_uuid = CBUUID(string: "6E400003-B5A3-F393-E0A9-E50E24DCCA9E")
+    public static let ability_uuid = CBUUID(string: "6E400004-B5A3-F393-E0A9-E50E24DCCA9E")
+    
+    // Dictionary to store discovered characteristics by UUID
+    var characteristicDict: [String: [CBCharacteristic]] = [:]
     
     @Published var peripheral: CBPeripheral?
     var centralManager: CBCentralManager!
@@ -44,7 +48,9 @@ class BluetoothManager: NSObject, ObservableObject, CBCentralManagerDelegate, CB
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral,
                         advertisementData: [String : Any], rssi RSSI: NSNumber) {
         // Check if the discovered peripheral is your ESP32
+        print("searching")
         if peripheral.name == esp32DeviceName {
+            print("found")
             // Stop scanning once the peripheral is found
             centralManager.stopScan()
 
@@ -92,14 +98,46 @@ class BluetoothManager: NSObject, ObservableObject, CBCentralManagerDelegate, CB
     
     // Helper method to find a characteristic by UUID
     private func findCharacteristic(withUUID uuid: String, in peripheral: CBPeripheral) -> CBCharacteristic? {
-        for service in peripheral.services ?? [] {
-            for characteristic in service.characteristics ?? [] {
-                if characteristic.uuid.uuidString == uuid {
-                    return characteristic
-                }
+        print("looking")
+        guard let characteristics = characteristicDict[uuid] else { return nil }
+        // You might want to add logic here to choose a characteristic if there are multiple instances with the same UUID.
+        return characteristics.first // Returning the first one for simplicity
+    }
+    
+    func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
+        guard error == nil else {
+            print("Error discovering services: \(error!.localizedDescription)")
+            return
+        }
+
+        if let services = peripheral.services {
+            for service in services {
+                // Discover characteristics for each service
+                peripheral.discoverCharacteristics(nil, for: service)
             }
         }
-        return nil
+    }
+
+    func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
+        guard error == nil else {
+            print("Error discovering characteristics: \(error!.localizedDescription)")
+            return
+        }
+
+        if let characteristics = service.characteristics {
+            // Store the discovered characteristics in the dictionary
+            for characteristic in characteristics {
+                let uuidString = characteristic.uuid.uuidString
+                if characteristicDict[uuidString] == nil {
+                    characteristicDict[uuidString] = [characteristic]
+                } else {
+                    characteristicDict[uuidString]?.append(characteristic)
+                }
+
+                // Do something with the discovered characteristics if needed
+                print("Discovered characteristic: \(characteristic)")
+            }
+        }
     }
     
     // Deinitializer to clean up resources if needed
