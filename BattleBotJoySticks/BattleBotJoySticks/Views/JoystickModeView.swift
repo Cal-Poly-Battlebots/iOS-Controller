@@ -31,7 +31,7 @@ struct SwipeGestureView: View {
                             swipeAngleDegrees = (270 + 180 + swipeAngle * 180 / .pi).truncatingRemainder(dividingBy: 360)
                             // Send data to Bluetooth
                             let dataToSend = "\(swipeAngleDegrees),\(swipeMagnitude)\n"
-                            BluetoothManager.shared.sendData(dataToSend, BluetoothManager.swipe_uuid)
+                            BluetoothManager.shared.sendData(dataToSend, BluetoothManager.swipe_uuid.uuidString)
                         }
                         .onEnded { _ in
                             // Reset swipe position when gesture ends
@@ -40,12 +40,87 @@ struct SwipeGestureView: View {
                             swipeAngleDegrees = 0.0
                             // Send data to Bluetooth to stop movement
                             let dataToSend = "0.0,0.0\n"
-                            BluetoothManager.shared.sendData(dataToSend, BluetoothManager.swipe_uuid)
+                            BluetoothManager.shared.sendData(dataToSend, BluetoothManager.swipe_uuid.uuidString)
                         }
                 )
                 .background(Color.indigo.opacity(0.2))
         }
         .edgesIgnoringSafeArea(.all) // Make the overlay cover the entire screen
+    }
+}
+
+struct JoystickView: View {
+    @Binding var joystickPosition: CGPoint
+
+    var body: some View {
+        ZStack {
+            // Create the joystick circle
+            Circle()
+                .frame(width: 50, height: 50)
+                .foregroundColor(.gray.opacity(0.4))
+                .position(joystickPosition)
+                .overlay(
+                    Circle()
+                        .stroke(Color.gray.opacity(0.4), lineWidth: 5)
+                        .frame(width: 57, height: 57)
+                        .position(.zero)
+                )
+                // What happens when circle is dragged
+                .gesture(
+                    DragGesture()
+                    .onChanged { value in
+                        // Update joystick position based on drag
+                        let newPosition = value.location
+                        let distance = sqrt(pow(newPosition.x, 2) + pow(newPosition.y, 2))
+                        let maxDistance: CGFloat = 120 // Maximum range
+                        
+                        if distance <= maxDistance {
+                            joystickPosition = newPosition
+                        } else {
+                            // Limit joystick movement within the maximum range
+                            let angle = atan2(newPosition.y, newPosition.x)
+                            joystickPosition = CGPoint(x: maxDistance * cos(angle), y: maxDistance * sin(angle))
+                        }
+                    }
+                    // When joystick is released
+                    .onEnded { _ in
+                        // Reset the joystick position when dragging ends
+                        joystickPosition = .zero
+                    }
+            )
+            
+            Group {
+                // Dashes representing the maximum range (North, South, East, West)
+                Dash()
+                    .rotationEffect(.degrees(0))
+                    .position(.zero)
+                    .offset(y: -150)
+                
+                Dash()
+                    .rotationEffect(.degrees(90))
+                    .position(.zero)
+                    .offset(x: 150)
+                
+                Dash()
+                    .rotationEffect(.degrees(180))
+                    .position(.zero)
+                    .offset(y: 150)
+                
+                Dash()
+                    .rotationEffect(.degrees(-90))
+                    .position(.zero)
+                    .offset(x: -150)
+            }
+        }
+        .frame(width: 30, height: 30)
+    }
+}
+
+struct Dash: View {
+    var body: some View {
+        Rectangle()
+            .frame(width: 2, height: 10)
+            .foregroundColor(.gray.opacity(0.4))
     }
 }
 
@@ -115,7 +190,7 @@ struct JoystickModeView: View {
                 xAxisValue = joystickPosition.x
                 yAxisValue = joystickPosition.y
                 // Calculate magnitude and angle
-                joyStickMagnitude = sqrt(pow(xAxisValue, 2) + pow(yAxisValue, 2))
+                joyStickMagnitude = sqrt(pow(xAxisValue, 2) + pow(yAxisValue, 2)) / 2.4
                 
                 // Calculate angle in radians
                 joyStickAngle = atan2(yAxisValue, xAxisValue)
@@ -126,7 +201,7 @@ struct JoystickModeView: View {
                 // Send data to Bluetooth on the main thread
                 DispatchQueue.main.async {
                     let dataToSend = "\(joyStickAngleDegrees),\(joyStickMagnitude)\n"
-                    BluetoothManager.shared.sendData(dataToSend, BluetoothManager.joystick_uuid)
+                    BluetoothManager.shared.sendData(dataToSend, BluetoothManager.joystick_uuid.uuidString)
                 }
             }
         }
