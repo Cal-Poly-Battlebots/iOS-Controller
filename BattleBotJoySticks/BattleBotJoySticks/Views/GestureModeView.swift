@@ -12,9 +12,10 @@ struct GestureModeView: View {
     @State private var finalFacingAngle = Angle(degrees: 0)
     @State private var dragOffset: CGSize = .zero
     @State private var position: CGPoint = .zero
-    @State private var abilityBars: [Bool] = Array(repeating: false, count: 10)
-    
     @State private var timer: Timer?
+    
+    @ObservedObject var viewModel: AbilityBarsViewModel
+    
     
     let safeAreaBorder: CGFloat = 20.0
     
@@ -95,9 +96,11 @@ struct GestureModeView: View {
                                 }
                         )
                     )
-                // Temporary Space For When I add the weapon bar
-                Text("Insert Ability Bar Here")
-                    .padding(safeAreaBorder)
+                // Temporary Space For When I add the ability bar
+//                Text("Insert Ability Bar Here")
+//                    .padding(safeAreaBorder)
+                AbilityBarView(abilityBars: $viewModel.abilityBars)
+                    .padding(20)
             }
             // Use onAppear to start sending data when the view appears
             .onAppear {
@@ -224,6 +227,6 @@ struct GestureModeView: View {
     
 struct GestureModeView_Previews: PreviewProvider {
     static var previews: some View {
-        GestureModeView()
-    }
+        let abilityBarsViewModel = AbilityBarsViewModel()
+        return GestureModeView(viewModel: abilityBarsViewModel)    }
 }

@@ -1,5 +1,5 @@
 //
-//  BoyStickModeView.swift
+//  JoyStickModeView.swift
 //  BattleBotJoySticks
 //
 //  Created by Aaron Rosen on 10/1/23.
@@ -134,29 +134,17 @@ struct JoystickModeView: View {
     @State private var swipePosition: CGPoint = .zero
     @State private var swipeMagnitude: CGFloat = 0.0
     @State private var swipeAngleDegrees: CGFloat = 0.0
-    @State private var abilityBars: [Bool] = Array(repeating: false, count: 10)
     @State private var timer: Timer?
+    
+    @ObservedObject var viewModel: AbilityBarsViewModel
 
     var body: some View {
         GeometryReader { geometry in
             ZStack {
                 // Ability bar at the bottom, centered
-                HStack(spacing: 10) { // Adjust spacing as needed
-                    ForEach(0..<abilityBars.count, id: \.self) { index in
-                        Button(action: {
-                            // Register taps in 10 different variables (abilityBars)
-                            abilityBars[index].toggle()
-                        }) {
-                            Text("\(index + 1)")
-                                .padding()
-                                .background(abilityBars[index] ? Color.green : Color.gray)
-                                .cornerRadius(15)
-                        }
-                        .frame(width: 40, height: 40) // Adjust the size as needed
-                    }
-                }
-                .padding(.bottom, 20) // Add padding to push it slightly above the bottom
-                .position(x: geometry.size.width / 2, y: geometry.size.height - 40) // Centered at the bottom
+                AbilityBarView(abilityBars: $viewModel.abilityBars)
+                    .padding(20)
+                    .position(x: geometry.size.width / 2, y: geometry.size.height - 40)
 
                 // Joystick at the bottom left
                 JoystickView(joystickPosition: $joystickPosition)
@@ -214,6 +202,7 @@ struct JoystickModeView: View {
 
 struct JoystickModeView_Previews: PreviewProvider {
     static var previews: some View {
-        JoystickModeView()
+        let abilityBarsViewModel = AbilityBarsViewModel()
+        return JoystickModeView(viewModel: abilityBarsViewModel)
     }
 }
