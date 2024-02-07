@@ -16,6 +16,7 @@
 		07E816852AC9684C002D1724 /* BattleBotJoySticksUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E816842AC9684C002D1724 /* BattleBotJoySticksUITestsLaunchTests.swift */; };
 		895B6EC32B6068FB00D5B5D6 /* AbilityBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895B6EC22B6068FB00D5B5D6 /* AbilityBarView.swift */; };
 		895B6EC52B60720700D5B5D6 /* AbilityBarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895B6EC42B60720700D5B5D6 /* AbilityBarViewModel.swift */; };
+		897F67A62B6993700005CA75 /* HybridModeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897F67A52B6993700005CA75 /* HybridModeView.swift */; };
 		89D8185E2B06B43E00426437 /* ModeSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D8185D2B06B43E00426437 /* ModeSelectorView.swift */; };
 		89D818602B06B48E00426437 /* GestureModeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D8185F2B06B48E00426437 /* GestureModeView.swift */; };
 		89D818642B06BCD700426437 /* JoystickModeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D818632B06BCD700426437 /* JoystickModeView.swift */; };
@@ -51,6 +52,7 @@
 		07E816842AC9684C002D1724 /* BattleBotJoySticksUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BattleBotJoySticksUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		895B6EC22B6068FB00D5B5D6 /* AbilityBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbilityBarView.swift; sourceTree = "<group>"; };
 		895B6EC42B60720700D5B5D6 /* AbilityBarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbilityBarViewModel.swift; sourceTree = "<group>"; };
+		897F67A52B6993700005CA75 /* HybridModeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HybridModeView.swift; sourceTree = "<group>"; };
 		89D8185D2B06B43E00426437 /* ModeSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModeSelectorView.swift; sourceTree = "<group>"; };
 		89D8185F2B06B48E00426437 /* GestureModeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GestureModeView.swift; sourceTree = "<group>"; };
 		89D818632B06BCD700426437 /* JoystickModeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoystickModeView.swift; sourceTree = "<group>"; };
@@ -154,6 +156,7 @@
 				89D8185D2B06B43E00426437 /* ModeSelectorView.swift */,
 				89D818632B06BCD700426437 /* JoystickModeView.swift */,
 				895B6EC22B6068FB00D5B5D6 /* AbilityBarView.swift */,
+				897F67A52B6993700005CA75 /* HybridModeView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -289,6 +292,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				89D8185E2B06B43E00426437 /* ModeSelectorView.swift in Sources */,
+				897F67A62B6993700005CA75 /* HybridModeView.swift in Sources */,
 				895B6EC32B6068FB00D5B5D6 /* AbilityBarView.swift in Sources */,
 				07985ABE2AFCC87D007E298B /* BluetoothManager.swift in Sources */,
 				89D818642B06BCD700426437 /* JoystickModeView.swift in Sources */,

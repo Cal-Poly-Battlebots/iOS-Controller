@@ -7,7 +7,11 @@
 
 import SwiftUI
 
-class AbilityBarsViewModel: ObservableObject {
-    @Published var abilityBars: [Bool] = Array(repeating: false, count: 10)
+class AbilityBarViewModel: ObservableObject {
+    @Published var abilityBar: [Bool] = Array(repeating: false, count: 5)
+}
+
+class NavigationBarViewModel: ObservableObject {
+    @Published var navigationBar: [Bool] = Array(repeating: false, count: 3)
 }
 

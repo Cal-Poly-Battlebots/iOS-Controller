@@ -8,19 +8,23 @@
 import SwiftUI
 
 struct ModeSelectorView: View {
-    let abilityBarsViewModel = AbilityBarsViewModel()
+    let abilityBarViewModel = AbilityBarViewModel()
+    let navigationBarViewModel = NavigationBarViewModel()
     
     var body: some View {
         NavigationView{
             List {
-                NavigationLink(destination: GestureModeView(viewModel: abilityBarsViewModel)) {
+                NavigationLink(destination: GestureModeView(abilityBarViewModel: abilityBarViewModel, navigationBarViewModel: navigationBarViewModel)) {
                     Label("Gesture Mode", systemImage: "hand.tap.fill")
                 }
-                NavigationLink(destination: JoystickModeView(viewModel: abilityBarsViewModel)) {
+                NavigationLink(destination: JoystickModeView(abilityBarViewModel: abilityBarViewModel, navigationBarViewModel: navigationBarViewModel)) {
                     Label("Joystick Mode", systemImage: "l.joystick.fill")
                 }
+                NavigationLink(destination: HybridModeView(abilityBarViewModel: abilityBarViewModel, navigationBarViewModel: navigationBarViewModel)) {
+                    Label("Hybrid Mode", systemImage: "rectangle.and.hand.point.up.left.fill")
+                }
             }
-            .navigationTitle("User Mode Selector")
+            .navigationTitle("Mode Selector")
         }
     }
 }

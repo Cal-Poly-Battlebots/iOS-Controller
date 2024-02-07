@@ -11,13 +11,14 @@ struct GestureModeView: View {
     @State private var currentFacingAngle = Angle(degrees: 0.0)
     @State private var finalFacingAngle = Angle(degrees: 0)
     @State private var dragOffset: CGSize = .zero
-    @State private var position: CGPoint = .zero
     @State private var timer: Timer?
     
-    @ObservedObject var viewModel: AbilityBarsViewModel
+    @ObservedObject var abilityBarViewModel: AbilityBarViewModel
+    @ObservedObject var navigationBarViewModel: NavigationBarViewModel
     
     
-    let safeAreaBorder: CGFloat = 20.0
+    
+    let safeAreaBorder: CGFloat = 50.0
     
     var body: some View {
         NavigationStack {
@@ -39,7 +40,8 @@ struct GestureModeView: View {
                                             .foregroundColor(.white)
                                             .font(.system(size: 14))
                                     )
-                                    .padding(safeAreaBorder + 60)
+                                    .padding([.leading, .trailing], safeAreaBorder + 50)//safeAreaBorder + 55)
+                                    .padding([.top, .bottom], safeAreaBorder)
                                     //.padding([.top,.bottom], safeAreaBorder + 50)
                                     // Add rotation from RotationGesture in Swipe Zone
                                     .rotationEffect(finalFacingAngle)
@@ -95,12 +97,27 @@ struct GestureModeView: View {
                                     }
                                 }
                         )
+                        // Add TapGesture that will reset dragOffset to zero
+                        .simultaneously(with: TapGesture().onEnded {
+                            dragOffset = .zero
+                        })
                     )
-                // Temporary Space For When I add the ability bar
-//                Text("Insert Ability Bar Here")
-//                    .padding(safeAreaBorder)
-                AbilityBarView(abilityBars: $viewModel.abilityBars)
-                    .padding(20)
+                HStack {
+                    Spacer()
+                    VStack {
+                        AbilityBarView(abilityBar: $navigationBarViewModel.navigationBar)
+                        Text("Mode Switch")
+                            .font(.title3)
+                    }
+                    Spacer()
+                    VStack {
+                        AbilityBarView(abilityBar: $abilityBarViewModel.abilityBar)
+                        Text("Ability Bar")
+                            .font(.title3)
+                    }
+                    Spacer()
+                }
+                .padding(.top, 20)
             }
             // Use onAppear to start sending data when the view appears
             .onAppear {
@@ -119,7 +136,7 @@ struct GestureModeView: View {
     private func startTimer() {
         // Start a timer to gradually set dragOffset to zero
         self.timer = Timer.scheduledTimer(withTimeInterval: 0.025, repeats: true) { _ in
-            let damping: CGFloat = 0.95 // Adjust damping as needed
+            let damping: CGFloat = 0.975 // Adjust damping as needed
             self.dragOffset.width *= damping
             self.dragOffset.height *= damping
             if abs(self.dragOffset.width) < 0.1 && abs(self.dragOffset.height) < 0.1 {
@@ -139,13 +156,12 @@ struct GestureModeView: View {
             let dragAngle = dragDirection().degrees
             let dragMag = dragMagnitude()
             
-            // Format the data as a string (you can adjust this based on your Bluetooth communication protocol)
             DispatchQueue.main.async {
                 let dataToSend1 = "\(dragAngle),\(dragMag)"
                 let dataToSend2 = "\(facingAngle), 50"
                 
                 BluetoothManager.shared.sendData(dataToSend1, BluetoothManager.joystick_uuid.uuidString)
-                BluetoothManager.shared.sendData(dataToSend2, BluetoothManager.swipe_uuid.uuidString)
+                BluetoothManager.shared.sendData(dataToSend2, BluetoothManager.rotation_uuid.uuidString)
                 
             }
         }
@@ -175,6 +191,7 @@ struct GestureModeView: View {
         let rotatedVertical = scaledHorizontal * CGFloat(sin(Double(finalFacingAngle.radians))) + scaledVertical * CGFloat(cos(Double(finalFacingAngle.radians)))
 
         // Return the rotated CGSize
+        //return CGSize(width: scaledHorizontal, height: scaledVertical)
         return CGSize(width: rotatedHorizontal, height: rotatedVertical)
     }
 
@@ -208,15 +225,18 @@ struct GestureModeView: View {
     private func dragDirection() -> Angle {
         // Calculate the angle with respect to the custom coordinate system
         var angle = atan2(dragOffset.width, -dragOffset.height)
-        // Ensure the angle is positive
+//        // Ensure the angle is positive
+//        if angle < 0 {
+//            angle += 2 * .pi
+//        }
+        
+        // Subtract the facingAngle from the calculated angle
+        angle -= CGFloat(finalFacingAngle.radians)
+        
+        // Normalize the angle to be between 0 and 2*pi
         if angle < 0 {
             angle += 2 * .pi
         }
-        // Convert to degrees
-        
-//        if (dragOffset.width == 0 && dragOffset.height == 0) {
-//            angle = 0
-//        }
         if dragMagnitude() < 2 {
             angle = 0
         }
@@ -227,6 +247,8 @@ struct GestureModeView: View {
     
 struct GestureModeView_Previews: PreviewProvider {
     static var previews: some View {
-        let abilityBarsViewModel = AbilityBarsViewModel()
-        return GestureModeView(viewModel: abilityBarsViewModel)    }
+        let abilityBarViewModel = AbilityBarViewModel()
+        let navigationBarViewModel = NavigationBarViewModel()
+        return GestureModeView(abilityBarViewModel: abilityBarViewModel, navigationBarViewModel: navigationBarViewModel)
+    }
 }

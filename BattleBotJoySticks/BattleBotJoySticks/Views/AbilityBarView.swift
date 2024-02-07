@@ -8,17 +8,17 @@
 import SwiftUI
 
 struct AbilityBarView: View {
-    @Binding var abilityBars: [Bool]
+    @Binding var abilityBar: [Bool]
 
     var body: some View {
         HStack(spacing: 10) {
-            ForEach(0..<abilityBars.count, id: \.self) { index in
+            ForEach(0..<abilityBar.count, id: \.self) { index in
                 Button(action: {
-                    abilityBars[index].toggle()
+                    abilityBar[index].toggle()
                 }) {
                     Text("\(index + 1)")
                         .padding()
-                        .background(abilityBars[index] ? Color.green : Color.gray)
+                        .background(abilityBar[index] ? Color.green : Color.gray)
                         .cornerRadius(15)
                 }
                 .frame(width: 40, height: 40)
@@ -29,6 +29,6 @@ struct AbilityBarView: View {
 
 struct AbilityBarView_Previews: PreviewProvider {
     static var previews: some View {
-        AbilityBarView(abilityBars: .constant([false, false, false, false, false, false, false, false, false, false]))
+        AbilityBarView(abilityBar: .constant([false, false]))
     }
 }

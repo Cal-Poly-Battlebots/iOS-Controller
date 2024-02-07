@@ -10,17 +10,20 @@ import CoreBluetooth
 
 class BluetoothManager: NSObject, ObservableObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     
-    // Declare the ESP32 device name as a constant
+    // Declare the ESP32 device name pattern
+//    private let esp32DevicePrefix = "ESP32"
     private let esp32DeviceName = "ESP32_BLE"
+    
+    // Dictionary to store discovered characteristics by UUID
+    var characteristicDict: [String: [CBCharacteristic]] = [:]
     
     // 3 Bluetooth characteristic UUIDs
     public let service_uuid = CBUUID(string: "6E400001-B5A3-F393-E0A9-E50E24DCCA9E")
     public static let joystick_uuid = CBUUID(string: "6E400002-B5A3-F393-E0A9-E50E24DCCA9E")
     public static let swipe_uuid = CBUUID(string: "6E400003-B5A3-F393-E0A9-E50E24DCCA9E")
     public static let ability_uuid = CBUUID(string: "6E400004-B5A3-F393-E0A9-E50E24DCCA9E")
+    public static let rotation_uuid = CBUUID(string: "6E400005-B5A3-F393-E0A9-E50E24DCCA9E")
     
-    // Dictionary to store discovered characteristics by UUID
-    var characteristicDict: [String: [CBCharacteristic]] = [:]
     
     @Published var peripheral: CBPeripheral?
     var centralManager: CBCentralManager!
@@ -44,6 +47,21 @@ class BluetoothManager: NSObject, ObservableObject, CBCentralManagerDelegate, CB
             print("Bluetooth is not available.")
         }
     }
+    
+//    func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral,
+//                        advertisementData: [String : Any], rssi RSSI: NSNumber) {
+//        // Check if the discovered peripheral name starts with "ESP32"
+//        if peripheral.name?.hasPrefix(esp32DevicePrefix) ?? false {
+//            // Stop scanning once the peripheral is found
+//            centralManager.stopScan()
+//
+//            // Save the reference to the peripheral
+//            self.peripheral = peripheral
+//
+//            // Connect to the peripheral
+//            centralManager.connect(peripheral, options: nil)
+//        }
+//    }
 
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral,
                         advertisementData: [String : Any], rssi RSSI: NSNumber) {
