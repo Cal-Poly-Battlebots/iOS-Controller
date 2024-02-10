@@ -9,8 +9,429 @@
 
 import SwiftUI
 
+// ----------------------------------------------------------------
+// Dual Joystick
+//
+enum JoystickType {
+    case left
+    case right
+}
 
-// Original Code
+struct JoystickView: View {
+    @Binding var joystickPosition: CGPoint
+    let joystickType: JoystickType
+
+    var body: some View {
+        ZStack {
+                // Create the joystick circle
+                Circle()
+                    .frame(width: 50, height: 50)
+                    .foregroundColor(.gray.opacity(0.4))
+                    .position(joystickPosition)
+                    .overlay(
+                        Circle()
+                            .stroke(Color.gray.opacity(0.4), lineWidth: 5)
+                            .frame(width: 57, height: 57)
+                            .position(.zero)
+                    )
+                    // What happens when circle is dragged
+                    .gesture(
+                        DragGesture()
+                        .onChanged { value in
+                            // Update joystick position based on drag
+                            let newPosition = value.location
+                            let distance = sqrt(pow(newPosition.x, 2) + pow(newPosition.y, 2))
+                            let maxDistance: CGFloat = 150 // Maximum range
+    
+                            if distance <= maxDistance {
+                                joystickPosition = newPosition
+                            } else {
+                                // Limit joystick movement within the maximum range
+                                let angle = atan2(newPosition.y, newPosition.x)
+                                joystickPosition = CGPoint(x: maxDistance * cos(angle), y: maxDistance * sin(angle))
+                            }
+                        }
+                        // When joystick is released
+                        .onEnded { _ in
+                            // Reset the joystick position when dragging ends
+                            joystickPosition = .zero
+                        }
+                )
+            
+            // Dashes representing the maximum range (North, South, East, West)
+            Group {
+                Dash().rotationEffect(.degrees(0)).position(.zero).offset(y: -150)
+                Dash().rotationEffect(.degrees(90)).position(.zero).offset(x: 150)
+                Dash().rotationEffect(.degrees(180)).position(.zero).offset(y: 150)
+                Dash().rotationEffect(.degrees(-90)).position(.zero).offset(x: -150)
+            }
+        }
+        .frame(width: 30, height: 30)
+    }
+
+    private func updateJoystickPosition(_ newPosition: CGPoint) {
+        let distance = sqrt(pow(newPosition.x, 2) + pow(newPosition.y, 2))
+        let maxDistance: CGFloat = 150 // Maximum range
+
+        if distance <= maxDistance {
+            joystickPosition = newPosition
+        } else {
+            let angle = atan2(newPosition.y, newPosition.x)
+            joystickPosition = CGPoint(x: maxDistance * cos(angle), y: maxDistance * sin(angle))
+        }
+    }
+}
+
+struct Dash: View {
+    var body: some View {
+        Rectangle()
+            .frame(width: 2, height: 10)
+            .foregroundColor(.gray.opacity(0.4))
+    }
+}
+
+struct JoystickModeView: View {
+    @State private var timer: Timer?
+
+    @State private var joystickPositionL: CGPoint = .zero
+    @State private var joystickPositionR: CGPoint = .zero
+    
+    @ObservedObject var abilityBarViewModel: AbilityBarViewModel
+    @ObservedObject var navigationBarViewModel: NavigationBarViewModel
+
+    let safeAreaBorder: CGFloat = 20.0
+
+    var body: some View {
+        NavigationStack {
+            VStack {
+                HStack {
+                    VStack(alignment: .leading) {
+                        HStack {
+                            VStack(alignment: .leading) {
+                                Text("Movement Joystick Angle: \(String(format: "%.2f", joystickAngle(joystickType: .left).degrees))")
+                                    .font(.title2)
+                                Text("Movement Joystick Magnitude: \(String(format: "%.2f", joystickMagnitude(joystickType: .left)))")
+                                    .font(.title2)
+                                Text("")
+                            }
+                        }
+                        Spacer()
+                        Spacer()
+                        Spacer()
+                        JoystickView(joystickPosition: $joystickPositionL, joystickType: .left)
+                            .frame(width: 100, height: 100)
+                            .padding([.leading, .trailing], safeAreaBorder + 100)
+                        Spacer()
+                    }
+                    .padding([.leading, .trailing], safeAreaBorder)
+                    
+                    VStack(alignment: .trailing) {
+                        HStack {
+                            Spacer()
+                            VStack(alignment: .trailing) {
+                                Text("Rotation Joystick Angle: \(String(format: "%.2f", joystickAngle(joystickType: .right).degrees))")
+                                    .font(.title2)
+                                Text("Rotation Joystick Magnitude:  \(String(format: "%.2f", joystickMagnitude(joystickType: .right)))")
+                                    .font(.title2)
+                            }
+                        }
+                        Spacer()
+                        Spacer()
+                        Spacer()
+                        JoystickView(joystickPosition: $joystickPositionR, joystickType: .right)
+                            .frame(width: 100, height: 100)
+                            .padding([.leading, .trailing], 100)
+                        Spacer()
+                    }
+                    .padding([.leading, .trailing], safeAreaBorder)
+                }
+                
+                
+                HStack {
+                    Spacer()
+                    VStack {
+                        AbilityBarView(abilityBar: $navigationBarViewModel.navigationBar)
+                        Text("Mode Switch")
+                            .font(.title3)
+                    }
+                    Spacer()
+                    VStack {
+                        AbilityBarView(abilityBar: $abilityBarViewModel.abilityBar)
+                        Text("Ability Bar")
+                            .font(.title3)
+                    }
+                    Spacer()
+                }
+                .padding(.top, 20)
+            }
+            .navigationBarTitle("Joystick Mode")
+            // Use onAppear to start sending data when the view appears
+            .onAppear {
+                startSendingBluetoothData()
+            }
+            // Use onDisappear to stop sending data when the view disappears
+            .onDisappear {
+                stopSendingBluetoothData()
+            }
+
+        }
+        
+
+    }
+    
+    // Start sending Bluetooth data
+    private func startSendingBluetoothData() {
+        // Start a timer to regularly send data over Bluetooth
+        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { _ in
+            // Convert angles to degrees and send over Bluetooth
+            let joyAngleLeft = joystickAngle(joystickType: .left).degrees
+            let joyMagLeft = joystickMagnitude(joystickType: .left)
+            
+            let joyAngleRight = joystickAngle(joystickType: .right).degrees
+            let joyMagRight = joystickMagnitude(joystickType: .right)
+            
+            // Format the data as a string (you can adjust this based on your Bluetooth communication protocol)
+            DispatchQueue.main.async {
+                let dataToSend1 = "\(joyAngleLeft),\(joyMagLeft)"
+                let dataToSend2 = "\(joyAngleRight),\(joyMagRight)"
+                
+                BluetoothManager.shared.sendData(dataToSend1, BluetoothManager.joystick_uuid.uuidString)
+                BluetoothManager.shared.sendData(dataToSend2, BluetoothManager.swipe_uuid.uuidString)
+                
+            }
+        }
+    }
+
+
+    // Stop sending Bluetooth data
+    private func stopSendingBluetoothData() {
+        // Invalidate the timer when the view disappears
+        timer?.invalidate()
+    }
+
+    private func joystickAngle(joystickType: JoystickType) -> Angle {
+        let joystickPosition: CGPoint
+        switch joystickType {
+        case .left:
+            joystickPosition = joystickPositionL
+        case .right:
+            joystickPosition = joystickPositionR
+        }
+
+        var angle = atan2(joystickPosition.y, joystickPosition.x)
+        angle += .pi / 2
+
+        if angle < 0 {
+            angle += 2 * .pi
+        }
+        if joystickMagnitude(joystickType: joystickType) < 2 {
+            angle = 0
+        }
+        return Angle(radians: Double(angle))
+    }
+
+    private func joystickMagnitude(joystickType: JoystickType) -> CGFloat {
+        let joystickPosition: CGPoint
+        switch joystickType {
+        case .left:
+            joystickPosition = joystickPositionL
+        case .right:
+            joystickPosition = joystickPositionR
+        }
+
+        return sqrt(pow(joystickPosition.x, 2) + pow(joystickPosition.y, 2)) / 3
+    }
+}
+
+struct JoystickModeView_Previews: PreviewProvider {
+    static var previews: some View {
+        let abilityBarViewModel = AbilityBarViewModel()
+        let navigationBarViewModel = NavigationBarViewModel()
+        return JoystickModeView(abilityBarViewModel: abilityBarViewModel, navigationBarViewModel: navigationBarViewModel)
+    }
+}
+
+// ----------------------------------------------------------------
+// Hybrid Mode for IMU testing
+// Leave JoystickType and JoystickView uncommented when testing
+//
+
+//import SwiftUI
+//
+//struct HybridModeView: View {
+//    @State private var currentFacingAngle = Angle(degrees: 0.0)
+//    @State private var finalFacingAngle = Angle(degrees: 0)
+//    @State private var timer: Timer?
+//
+//    @ObservedObject var abilityBarViewModel: AbilityBarViewModel
+//    @ObservedObject var navigationBarViewModel: NavigationBarViewModel
+//
+//    @State private var joystickPosition: CGPoint = .zero
+//
+//    let safeAreaBorder: CGFloat = 20.0
+//
+//    var body: some View {
+//        NavigationStack {
+//            VStack{
+//                HStack{
+//                    VStack(alignment: .leading){
+//                        HStack{
+//                            VStack(alignment: .leading) {
+//                                Text("Facing Angle: \(String(format: "%.2f", finalFacingAngle.degrees))")
+//                                    .font(.title2)
+//                                Text("Joystick Angle: \(String(format: "%.2f", joystickAngle().degrees))")
+//                                    .font(.title2)
+//                                Text("Joystick Magnitude: \(String(format: "%.2f", joystickMagnitude()))")
+//                                    .font(.title2)
+//                            }
+//                            Spacer()
+//                        }
+//                        Spacer()
+//                        Spacer()
+//                        Spacer()
+//                        JoystickView(joystickPosition: $joystickPosition, joystickType: .left)
+//                        .frame(width: 100, height: 100)
+//                        .padding([.leading, .trailing], safeAreaBorder + 100)
+//                        Spacer()
+//                    }
+//                    .padding([.leading, .trailing], safeAreaBorder)
+//
+//                    // Swipe Zone
+//                    RoundedRectangle(cornerRadius: 10.0)
+//                        .fill(Color.indigo.opacity(0.2))
+//                        .padding([.leading, .trailing], safeAreaBorder)
+//                        .overlay(
+//                            VStack{
+//                                HStack {
+//                                    Spacer()
+//                                    // Visual Representation (top right corner) of what is happening to the Robot
+//                                    RoundedRectangle(cornerRadius: 10.0)
+//                                        .fill(Color.gray)
+//                                        .frame(width: 100, height: 70)
+//                                        .overlay(
+//                                            Text("Claymore")
+//                                                .foregroundColor(.white)
+//                                                .font(.system(size: 14))
+//                                        )
+//                                        .padding([.leading, .trailing], safeAreaBorder + 30)
+//                                        .padding([.top, .bottom], safeAreaBorder+20)
+//                                        // Add rotation from RotationGesture in Swipe Zone
+//                                        .rotationEffect(finalFacingAngle)
+//                                }
+//                                Spacer()
+//                            }
+//                        )
+//                        .gesture(
+//                            RotationGesture()
+//                                .onChanged { angle in
+//                                    // Add the currentFacingAngle to the finalFacingAngle to accumulate rotations
+//                                    finalFacingAngle = currentFacingAngle + angle
+//                                    // Make sure the angle is between 0 and 360 degrees
+//                                    if finalFacingAngle.degrees < 0 {
+//                                        finalFacingAngle = .degrees(360 + finalFacingAngle.degrees)
+//                                    } else if finalFacingAngle.degrees >= 360 {
+//                                        finalFacingAngle = .degrees(finalFacingAngle.degrees - 360)
+//                                    }
+//                                }
+//                                .onEnded { angle in
+//                                    currentFacingAngle = finalFacingAngle
+//                                }
+//                        )
+//                }
+//                HStack {
+//                    Spacer()
+//                    VStack {
+//                        AbilityBarView(abilityBar: $navigationBarViewModel.navigationBar)
+//                        Text("Mode Switch")
+//                            .font(.title3)
+//                    }
+//                    Spacer()
+//                    VStack {
+//                        AbilityBarView(abilityBar: $abilityBarViewModel.abilityBar)
+//                        Text("Ability Bar")
+//                            .font(.title3)
+//                    }
+//                    Spacer()
+//                }
+//                .padding(.top, 20)
+//            }
+//            .navigationBarTitle("Hybrid Mode")
+//            // Use onAppear to start sending data when the view appears
+//            .onAppear {
+//                startSendingBluetoothData()
+//            }
+//            // Use onDisappear to stop sending data when the view disappears
+//            .onDisappear {
+//                stopSendingBluetoothData()
+//            }
+//
+//        }
+//
+//    }
+//
+//    // Start sending Bluetooth data
+//    private func startSendingBluetoothData() {
+//        // Start a timer to regularly send data over Bluetooth
+//        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { _ in
+//            // Convert angles to degrees and send over Bluetooth
+//            let facingAngle = finalFacingAngle.degrees
+//            let joyAngle = joystickAngle().degrees
+//            let joyMag = joystickMagnitude()
+//
+//            // Format the data as a string (you can adjust this based on your Bluetooth communication protocol)
+//            DispatchQueue.main.async {
+//                let dataToSend1 = "\(joyAngle),\(joyMag)"
+//                let dataToSend2 = "\(facingAngle), 50"
+//
+//                BluetoothManager.shared.sendData(dataToSend1, BluetoothManager.joystick_uuid.uuidString)
+//                BluetoothManager.shared.sendData(dataToSend2, BluetoothManager.swipe_uuid.uuidString)
+//
+//            }
+//        }
+//    }
+//
+//    // Stop sending Bluetooth data
+//    private func stopSendingBluetoothData() {
+//        // Invalidate the timer when the view disappears
+//        timer?.invalidate()
+//    }
+//
+//    private func joystickAngle() -> Angle {
+//        // Calculate the angle based on the joystick's position
+//
+//        var angle = atan2(joystickPosition.y, joystickPosition.x)
+//
+//        angle += .pi / 2
+//
+//        // Normalize the angle to be between 0 and 2*pi
+//        if angle < 0 {
+//            angle += 2 * .pi
+//        }
+//        if joystickMagnitude() < 2 {
+//            angle = 0
+//        }
+//        return Angle(radians: Double(angle))
+//    }
+//
+//    private func joystickMagnitude() -> CGFloat {
+//        return sqrt(pow(joystickPosition.x, 2) + pow(joystickPosition.y, 2)) / 3
+//    }
+//
+//}
+//
+//struct HybridModeView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        let abilityBarViewModel = AbilityBarViewModel()
+//        let navigationBarViewModel = NavigationBarViewModel()
+//        return HybridModeView(abilityBarViewModel: abilityBarViewModel, navigationBarViewModel: navigationBarViewModel)
+//    }
+//}
+
+
+
+// -------------------------------------------------------------------
+// Original Joystick Mode Code by Aaron
+
 //struct SwipeGestureView: View {
 //    @Binding var swipePosition: CGPoint
 //    @Binding var swipeMagnitude: CGFloat
@@ -203,273 +624,3 @@ import SwiftUI
 //        }
 //    }
 //}
-
-
-// ----------------------------------------------------------------
-// Dual Joystick
-//
-enum JoystickType {
-    case left
-    case right
-}
-
-struct JoystickView: View {
-    @Binding var joystickPosition: CGPoint
-    let joystickType: JoystickType
-
-    var body: some View {
-        ZStack {
-//            // Create the joystick circle
-//            Circle()
-//                .frame(width: 50, height: 50)
-//                .foregroundColor(.gray.opacity(0.4))
-//                .position(joystickPosition)
-//                .overlay(
-//                    Circle()
-//                        .stroke(Color.gray.opacity(0.4), lineWidth: 5)
-//                        .frame(width: 57, height: 57)
-//                        .position(.zero)
-//                )
-//                // What happens when circle is dragged
-//                .gesture(
-//                    DragGesture()
-//                        .onChanged { value in
-//                            updateJoystickPosition(value.location)
-//                        }
-//                        // When joystick is released
-//                        .onEnded { _ in
-//                            // Reset the joystick position when dragging ends
-//                            joystickPosition = .zero
-//                        }
-//                )
-                // Create the joystick circle
-                Circle()
-                    .frame(width: 50, height: 50)
-                    .foregroundColor(.gray.opacity(0.4))
-                    .position(joystickPosition)
-                    .overlay(
-                        Circle()
-                            .stroke(Color.gray.opacity(0.4), lineWidth: 5)
-                            .frame(width: 57, height: 57)
-                            .position(.zero)
-                    )
-                    // What happens when circle is dragged
-                    .gesture(
-                        DragGesture()
-                        .onChanged { value in
-                            // Update joystick position based on drag
-                            let newPosition = value.location
-                            let distance = sqrt(pow(newPosition.x, 2) + pow(newPosition.y, 2))
-                            let maxDistance: CGFloat = 150 // Maximum range
-    
-                            if distance <= maxDistance {
-                                joystickPosition = newPosition
-                            } else {
-                                // Limit joystick movement within the maximum range
-                                let angle = atan2(newPosition.y, newPosition.x)
-                                joystickPosition = CGPoint(x: maxDistance * cos(angle), y: maxDistance * sin(angle))
-                            }
-                        }
-                        // When joystick is released
-                        .onEnded { _ in
-                            // Reset the joystick position when dragging ends
-                            joystickPosition = .zero
-                        }
-                )
-            
-            // Dashes representing the maximum range (North, South, East, West)
-            Group {
-                Dash().rotationEffect(.degrees(0)).position(.zero).offset(y: -150)
-                Dash().rotationEffect(.degrees(90)).position(.zero).offset(x: 150)
-                Dash().rotationEffect(.degrees(180)).position(.zero).offset(y: 150)
-                Dash().rotationEffect(.degrees(-90)).position(.zero).offset(x: -150)
-            }
-        }
-        .frame(width: 30, height: 30)
-    }
-
-    private func updateJoystickPosition(_ newPosition: CGPoint) {
-        let distance = sqrt(pow(newPosition.x, 2) + pow(newPosition.y, 2))
-        let maxDistance: CGFloat = 150 // Maximum range
-
-        if distance <= maxDistance {
-            joystickPosition = newPosition
-        } else {
-            let angle = atan2(newPosition.y, newPosition.x)
-            joystickPosition = CGPoint(x: maxDistance * cos(angle), y: maxDistance * sin(angle))
-        }
-    }
-}
-
-struct Dash: View {
-    var body: some View {
-        Rectangle()
-            .frame(width: 2, height: 10)
-            .foregroundColor(.gray.opacity(0.4))
-    }
-}
-
-struct JoystickModeView: View {
-    @State private var timer: Timer?
-
-    @State private var joystickPositionL: CGPoint = .zero
-    @State private var joystickPositionR: CGPoint = .zero
-    
-    @ObservedObject var abilityBarViewModel: AbilityBarViewModel
-    @ObservedObject var navigationBarViewModel: NavigationBarViewModel
-
-    let safeAreaBorder: CGFloat = 20.0
-
-    var body: some View {
-        NavigationStack {
-            VStack {
-                HStack {
-                    VStack(alignment: .leading) {
-                        HStack {
-                            VStack(alignment: .leading) {
-                                Text("Movement Joystick Angle: \(String(format: "%.2f", joystickAngle(joystickType: .left).degrees))")
-                                    .font(.title2)
-                                Text("Movement Joystick Magnitude: \(String(format: "%.2f", joystickMagnitude(joystickType: .left)))")
-                                    .font(.title2)
-                                Text("")
-                            }
-                        }
-                        Spacer()
-                        Spacer()
-                        Spacer()
-                        JoystickView(joystickPosition: $joystickPositionL, joystickType: .left)
-                            .frame(width: 100, height: 100)
-                            .padding([.leading, .trailing], safeAreaBorder + 100)
-                        Spacer()
-                    }
-                    .padding([.leading, .trailing], safeAreaBorder)
-                    
-                    VStack(alignment: .trailing) {
-                        HStack {
-                            Spacer()
-                            VStack(alignment: .trailing) {
-                                Text("Rotation Joystick Angle: \(String(format: "%.2f", joystickAngle(joystickType: .right).degrees))")
-                                    .font(.title2)
-                                Text("Rotation Joystick Magnitude:  \(String(format: "%.2f", joystickMagnitude(joystickType: .right)))")
-                                    .font(.title2)
-                            }
-                        }
-                        Spacer()
-                        Spacer()
-                        Spacer()
-                        JoystickView(joystickPosition: $joystickPositionR, joystickType: .right)
-                            .frame(width: 100, height: 100)
-                            .padding([.leading, .trailing], 100)
-                        Spacer()
-                    }
-                    .padding([.leading, .trailing], safeAreaBorder)
-                }
-                
-                
-                HStack {
-                    Spacer()
-                    VStack {
-                        AbilityBarView(abilityBar: $navigationBarViewModel.navigationBar)
-                        Text("Mode Switch")
-                            .font(.title3)
-                    }
-                    Spacer()
-                    VStack {
-                        AbilityBarView(abilityBar: $abilityBarViewModel.abilityBar)
-                        Text("Ability Bar")
-                            .font(.title3)
-                    }
-                    Spacer()
-                }
-                .padding(.top, 20)
-            }
-            // Use onAppear to start sending data when the view appears
-            .onAppear {
-                startSendingBluetoothData()
-            }
-            // Use onDisappear to stop sending data when the view disappears
-            .onDisappear {
-                stopSendingBluetoothData()
-            }
-
-        }
-        .navigationBarTitle("Joystick Mode")
-        
-
-    }
-    
-    // Start sending Bluetooth data
-    private func startSendingBluetoothData() {
-        // Start a timer to regularly send data over Bluetooth
-        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { _ in
-            // Convert angles to degrees and send over Bluetooth
-            let joyAngleLeft = joystickAngle(joystickType: .left).degrees
-            let joyMagLeft = joystickMagnitude(joystickType: .left)
-            
-            let joyAngleRight = joystickAngle(joystickType: .right).degrees
-            let joyMagRight = joystickMagnitude(joystickType: .right)
-            
-            // Format the data as a string (you can adjust this based on your Bluetooth communication protocol)
-            DispatchQueue.main.async {
-                let dataToSend1 = "\(joyAngleLeft),\(joyMagLeft)"
-                let dataToSend2 = "\(joyAngleRight),\(joyMagRight)"
-                
-                BluetoothManager.shared.sendData(dataToSend1, BluetoothManager.joystick_uuid.uuidString)
-                BluetoothManager.shared.sendData(dataToSend2, BluetoothManager.swipe_uuid.uuidString)
-                
-            }
-        }
-    }
-
-
-    // Stop sending Bluetooth data
-    private func stopSendingBluetoothData() {
-        // Invalidate the timer when the view disappears
-        timer?.invalidate()
-    }
-
-    private func joystickAngle(joystickType: JoystickType) -> Angle {
-        let joystickPosition: CGPoint
-        switch joystickType {
-        case .left:
-            joystickPosition = joystickPositionL
-        case .right:
-            joystickPosition = joystickPositionR
-        }
-
-        var angle = atan2(joystickPosition.y, joystickPosition.x)
-        angle += .pi / 2
-
-        if angle < 0 {
-            angle += 2 * .pi
-        }
-        if joystickMagnitude(joystickType: joystickType) < 2 {
-            angle = 0
-        }
-        return Angle(radians: Double(angle))
-    }
-
-    private func joystickMagnitude(joystickType: JoystickType) -> CGFloat {
-        let joystickPosition: CGPoint
-        switch joystickType {
-        case .left:
-            joystickPosition = joystickPositionL
-        case .right:
-            joystickPosition = joystickPositionR
-        }
-
-        return sqrt(pow(joystickPosition.x, 2) + pow(joystickPosition.y, 2)) / 3
-    }
-}
-
-
-
-
-
-struct JoystickModeView_Previews: PreviewProvider {
-    static var previews: some View {
-        let abilityBarViewModel = AbilityBarViewModel()
-        let navigationBarViewModel = NavigationBarViewModel()
-        return JoystickModeView(abilityBarViewModel: abilityBarViewModel, navigationBarViewModel: navigationBarViewModel)
-    }
-}

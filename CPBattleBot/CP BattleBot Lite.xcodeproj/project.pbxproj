@@ -16,9 +16,6 @@
 		07E816852AC9684C002D1724 /* CPBattleBotUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E816842AC9684C002D1724 /* CPBattleBotUITests.swift */; };
 		895B6EC32B6068FB00D5B5D6 /* AbilityBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895B6EC22B6068FB00D5B5D6 /* AbilityBarView.swift */; };
 		895B6EC52B60720700D5B5D6 /* AbilityBarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895B6EC42B60720700D5B5D6 /* AbilityBarViewModel.swift */; };
-		897F67A62B6993700005CA75 /* HybridModeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897F67A52B6993700005CA75 /* HybridModeView.swift */; };
-		89D8185E2B06B43E00426437 /* ModeSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D8185D2B06B43E00426437 /* ModeSelectorView.swift */; };
-		89D818602B06B48E00426437 /* GestureModeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D8185F2B06B48E00426437 /* GestureModeView.swift */; };
 		89D818642B06BCD700426437 /* JoystickModeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D818632B06BCD700426437 /* JoystickModeView.swift */; };
 /* End PBXBuildFile section */
 
@@ -52,9 +49,6 @@
 		07E816842AC9684C002D1724 /* CPBattleBotUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CPBattleBotUITests.swift; sourceTree = "<group>"; };
 		895B6EC22B6068FB00D5B5D6 /* AbilityBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbilityBarView.swift; sourceTree = "<group>"; };
 		895B6EC42B60720700D5B5D6 /* AbilityBarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbilityBarViewModel.swift; sourceTree = "<group>"; };
-		897F67A52B6993700005CA75 /* HybridModeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HybridModeView.swift; sourceTree = "<group>"; };
-		89D8185D2B06B43E00426437 /* ModeSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModeSelectorView.swift; sourceTree = "<group>"; };
-		89D8185F2B06B48E00426437 /* GestureModeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GestureModeView.swift; sourceTree = "<group>"; };
 		89D818632B06BCD700426437 /* JoystickModeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoystickModeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -154,11 +148,8 @@
 		89D8186B2B06C91400426437 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				89D8185F2B06B48E00426437 /* GestureModeView.swift */,
-				89D8185D2B06B43E00426437 /* ModeSelectorView.swift */,
 				89D818632B06BCD700426437 /* JoystickModeView.swift */,
 				895B6EC22B6068FB00D5B5D6 /* AbilityBarView.swift */,
-				897F67A52B6993700005CA75 /* HybridModeView.swift */,
 			);
 			name = Views;
 			path = CPBattleBot/Views;
@@ -243,7 +234,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 07E8165F2AC9684A002D1724 /* Build configuration list for PBXProject "CPBattleBot" */;
+			buildConfigurationList = 07E8165F2AC9684A002D1724 /* Build configuration list for PBXProject "CP BattleBot Lite" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -294,14 +285,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				89D8185E2B06B43E00426437 /* ModeSelectorView.swift in Sources */,
-				897F67A62B6993700005CA75 /* HybridModeView.swift in Sources */,
 				895B6EC32B6068FB00D5B5D6 /* AbilityBarView.swift in Sources */,
 				07985ABE2AFCC87D007E298B /* BluetoothManager.swift in Sources */,
 				89D818642B06BCD700426437 /* JoystickModeView.swift in Sources */,
 				07E816682AC9684A002D1724 /* CPBattleBotApp.swift in Sources */,
 				895B6EC52B60720700D5B5D6 /* AbilityBarViewModel.swift in Sources */,
-				89D818602B06B48E00426437 /* GestureModeView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -460,14 +448,16 @@
 		07E816892AC9684C002D1724 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = LiteAppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"CPBattleBot/Preview Content\"";
 				DEVELOPMENT_TEAM = EHT5EF5CQZ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "CP BattleBot Lite";
 				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "We need Bluetooth to discover and connect to nearby devices";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -478,7 +468,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.KieranHomeLabs.BattleBotJoySticks;
+				PRODUCT_BUNDLE_IDENTIFIER = com.KieranHomeLabs.CPBattleBotLite;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -489,14 +479,16 @@
 		07E8168A2AC9684C002D1724 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = LiteAppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"CPBattleBot/Preview Content\"";
 				DEVELOPMENT_TEAM = EHT5EF5CQZ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "CP BattleBot Lite";
 				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "We need Bluetooth to discover and connect to nearby devices";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -507,7 +499,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.KieranHomeLabs.BattleBotJoySticks;
+				PRODUCT_BUNDLE_IDENTIFIER = com.KieranHomeLabs.CPBattleBotLite;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -525,7 +517,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.gmail.minecraftandmoar.BattleBotJoySticksTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.KieranHomeLabs.CPBattleBotTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
@@ -544,7 +536,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.gmail.minecraftandmoar.BattleBotJoySticksTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.KieranHomeLabs.CPBattleBotTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
@@ -561,7 +553,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.gmail.minecraftandmoar.BattleBotJoySticksUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.KieranHomeLabs.CPBattleBotUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
@@ -578,7 +570,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.gmail.minecraftandmoar.BattleBotJoySticksUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.KieranHomeLabs.CPBattleBotUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
@@ -590,7 +582,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		07E8165F2AC9684A002D1724 /* Build configuration list for PBXProject "CPBattleBot" */ = {
+		07E8165F2AC9684A002D1724 /* Build configuration list for PBXProject "CP BattleBot Lite" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				07E816862AC9684C002D1724 /* Debug */,

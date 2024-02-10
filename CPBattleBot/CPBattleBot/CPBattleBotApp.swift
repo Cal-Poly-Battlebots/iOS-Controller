@@ -9,10 +9,14 @@
 import SwiftUI
 
 @main
-struct CPBattleBotApp: App {
+struct CPBattleBotApp: App 
+{
+    let abilityBarViewModel = AbilityBarViewModel()
+    let navigationBarViewModel = NavigationBarViewModel()
+    
     var body: some Scene {
         WindowGroup {
-            ModeSelectorView()
+            JoystickModeView(abilityBarViewModel: abilityBarViewModel, navigationBarViewModel: navigationBarViewModel)
         }
     }
 }
