@@ -8,12 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		07985ABE2AFCC87D007E298B /* BluetoothManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07985ABD2AFCC87D007E298B /* BluetoothManager.swift */; };
-		07E816682AC9684A002D1724 /* BattleBotJoySticksApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E816672AC9684A002D1724 /* BattleBotJoySticksApp.swift */; };
+		07E816682AC9684A002D1724 /* CPBattleBotApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E816672AC9684A002D1724 /* CPBattleBotApp.swift */; };
 		07E8166C2AC9684B002D1724 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07E8166B2AC9684B002D1724 /* Assets.xcassets */; };
 		07E8166F2AC9684B002D1724 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07E8166E2AC9684B002D1724 /* Preview Assets.xcassets */; };
-		07E816792AC9684C002D1724 /* BattleBotJoySticksTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E816782AC9684C002D1724 /* BattleBotJoySticksTests.swift */; };
-		07E816832AC9684C002D1724 /* BattleBotJoySticksUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E816822AC9684C002D1724 /* BattleBotJoySticksUITests.swift */; };
-		07E816852AC9684C002D1724 /* BattleBotJoySticksUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E816842AC9684C002D1724 /* BattleBotJoySticksUITestsLaunchTests.swift */; };
+		07E816792AC9684C002D1724 /* CPBattleBotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E816782AC9684C002D1724 /* CPBattleBotTests.swift */; };
+		07E816832AC9684C002D1724 /* CPBattleBotUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E816822AC9684C002D1724 /* CPBattleBotUITestsLaunchTests.swift */; };
+		07E816852AC9684C002D1724 /* CPBattleBotUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E816842AC9684C002D1724 /* CPBattleBotUITests.swift */; };
 		895B6EC32B6068FB00D5B5D6 /* AbilityBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895B6EC22B6068FB00D5B5D6 /* AbilityBarView.swift */; };
 		895B6EC52B60720700D5B5D6 /* AbilityBarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895B6EC42B60720700D5B5D6 /* AbilityBarViewModel.swift */; };
 		897F67A62B6993700005CA75 /* HybridModeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897F67A52B6993700005CA75 /* HybridModeView.swift */; };
@@ -41,15 +41,15 @@
 
 /* Begin PBXFileReference section */
 		07985ABD2AFCC87D007E298B /* BluetoothManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothManager.swift; sourceTree = "<group>"; };
-		07E816642AC9684A002D1724 /* BattleBotJoySticks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BattleBotJoySticks.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		07E816672AC9684A002D1724 /* BattleBotJoySticksApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BattleBotJoySticksApp.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
-		07E8166B2AC9684B002D1724 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		07E816642AC9684A002D1724 /* CP BattleBot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CP BattleBot.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		07E816672AC9684A002D1724 /* CPBattleBotApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CPBattleBotApp.swift; path = CPBattleBot/CPBattleBotApp.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
+		07E8166B2AC9684B002D1724 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = CPBattleBot/Assets.xcassets; sourceTree = "<group>"; };
 		07E8166E2AC9684B002D1724 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		07E816742AC9684C002D1724 /* BattleBotJoySticksTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BattleBotJoySticksTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		07E816782AC9684C002D1724 /* BattleBotJoySticksTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BattleBotJoySticksTests.swift; sourceTree = "<group>"; };
-		07E8167E2AC9684C002D1724 /* BattleBotJoySticksUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BattleBotJoySticksUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		07E816822AC9684C002D1724 /* BattleBotJoySticksUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BattleBotJoySticksUITests.swift; sourceTree = "<group>"; };
-		07E816842AC9684C002D1724 /* BattleBotJoySticksUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BattleBotJoySticksUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		07E816742AC9684C002D1724 /* CP BattleBotTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "CP BattleBotTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		07E816782AC9684C002D1724 /* CPBattleBotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CPBattleBotTests.swift; sourceTree = "<group>"; };
+		07E8167E2AC9684C002D1724 /* CP BattleBotUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "CP BattleBotUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		07E816822AC9684C002D1724 /* CPBattleBotUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CPBattleBotUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		07E816842AC9684C002D1724 /* CPBattleBotUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CPBattleBotUITests.swift; sourceTree = "<group>"; };
 		895B6EC22B6068FB00D5B5D6 /* AbilityBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbilityBarView.swift; sourceTree = "<group>"; };
 		895B6EC42B60720700D5B5D6 /* AbilityBarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbilityBarViewModel.swift; sourceTree = "<group>"; };
 		897F67A52B6993700005CA75 /* HybridModeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HybridModeView.swift; sourceTree = "<group>"; };
@@ -86,9 +86,9 @@
 		07E8165B2AC9684A002D1724 = {
 			isa = PBXGroup;
 			children = (
-				07E816662AC9684A002D1724 /* BattleBotJoySticks */,
-				07E816772AC9684C002D1724 /* BattleBotJoySticksTests */,
-				07E816812AC9684C002D1724 /* BattleBotJoySticksUITests */,
+				07E816662AC9684A002D1724 /* CPBattleBot */,
+				07E816772AC9684C002D1724 /* CPBattleBotTests */,
+				07E816812AC9684C002D1724 /* CPBattleBotUITests */,
 				07E816652AC9684A002D1724 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -96,23 +96,23 @@
 		07E816652AC9684A002D1724 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				07E816642AC9684A002D1724 /* BattleBotJoySticks.app */,
-				07E816742AC9684C002D1724 /* BattleBotJoySticksTests.xctest */,
-				07E8167E2AC9684C002D1724 /* BattleBotJoySticksUITests.xctest */,
+				07E816642AC9684A002D1724 /* CP BattleBot.app */,
+				07E816742AC9684C002D1724 /* CP BattleBotTests.xctest */,
+				07E8167E2AC9684C002D1724 /* CP BattleBotUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		07E816662AC9684A002D1724 /* BattleBotJoySticks */ = {
+		07E816662AC9684A002D1724 /* CPBattleBot */ = {
 			isa = PBXGroup;
 			children = (
-				07E816672AC9684A002D1724 /* BattleBotJoySticksApp.swift */,
+				07E816672AC9684A002D1724 /* CPBattleBotApp.swift */,
 				89D8186B2B06C91400426437 /* Views */,
 				07E8166B2AC9684B002D1724 /* Assets.xcassets */,
 				07E8166D2AC9684B002D1724 /* Preview Content */,
 				895B6EC62B60722D00D5B5D6 /* Utilities */,
 			);
-			path = BattleBotJoySticks;
+			name = CPBattleBot;
 			sourceTree = "<group>";
 		};
 		07E8166D2AC9684B002D1724 /* Preview Content */ = {
@@ -120,24 +120,25 @@
 			children = (
 				07E8166E2AC9684B002D1724 /* Preview Assets.xcassets */,
 			);
-			path = "Preview Content";
+			name = "Preview Content";
+			path = "CPBattleBot/Preview Content";
 			sourceTree = "<group>";
 		};
-		07E816772AC9684C002D1724 /* BattleBotJoySticksTests */ = {
+		07E816772AC9684C002D1724 /* CPBattleBotTests */ = {
 			isa = PBXGroup;
 			children = (
-				07E816782AC9684C002D1724 /* BattleBotJoySticksTests.swift */,
+				07E816782AC9684C002D1724 /* CPBattleBotTests.swift */,
 			);
-			path = BattleBotJoySticksTests;
+			path = CPBattleBotTests;
 			sourceTree = "<group>";
 		};
-		07E816812AC9684C002D1724 /* BattleBotJoySticksUITests */ = {
+		07E816812AC9684C002D1724 /* CPBattleBotUITests */ = {
 			isa = PBXGroup;
 			children = (
-				07E816822AC9684C002D1724 /* BattleBotJoySticksUITests.swift */,
-				07E816842AC9684C002D1724 /* BattleBotJoySticksUITestsLaunchTests.swift */,
+				07E816822AC9684C002D1724 /* CPBattleBotUITestsLaunchTests.swift */,
+				07E816842AC9684C002D1724 /* CPBattleBotUITests.swift */,
 			);
-			path = BattleBotJoySticksUITests;
+			path = CPBattleBotUITests;
 			sourceTree = "<group>";
 		};
 		895B6EC62B60722D00D5B5D6 /* Utilities */ = {
@@ -146,7 +147,8 @@
 				07985ABD2AFCC87D007E298B /* BluetoothManager.swift */,
 				895B6EC42B60720700D5B5D6 /* AbilityBarViewModel.swift */,
 			);
-			path = Utilities;
+			name = Utilities;
+			path = CPBattleBot/Utilities;
 			sourceTree = "<group>";
 		};
 		89D8186B2B06C91400426437 /* Views */ = {
@@ -158,15 +160,16 @@
 				895B6EC22B6068FB00D5B5D6 /* AbilityBarView.swift */,
 				897F67A52B6993700005CA75 /* HybridModeView.swift */,
 			);
-			path = Views;
+			name = Views;
+			path = CPBattleBot/Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		07E816632AC9684A002D1724 /* BattleBotJoySticks */ = {
+		07E816632AC9684A002D1724 /* CP BattleBot */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 07E816882AC9684C002D1724 /* Build configuration list for PBXNativeTarget "BattleBotJoySticks" */;
+			buildConfigurationList = 07E816882AC9684C002D1724 /* Build configuration list for PBXNativeTarget "CP BattleBot" */;
 			buildPhases = (
 				07E816602AC9684A002D1724 /* Sources */,
 				07E816612AC9684A002D1724 /* Frameworks */,
@@ -176,14 +179,14 @@
 			);
 			dependencies = (
 			);
-			name = BattleBotJoySticks;
+			name = "CP BattleBot";
 			productName = BattleBotJoySticks;
-			productReference = 07E816642AC9684A002D1724 /* BattleBotJoySticks.app */;
+			productReference = 07E816642AC9684A002D1724 /* CP BattleBot.app */;
 			productType = "com.apple.product-type.application";
 		};
-		07E816732AC9684C002D1724 /* BattleBotJoySticksTests */ = {
+		07E816732AC9684C002D1724 /* CP BattleBotTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 07E8168B2AC9684C002D1724 /* Build configuration list for PBXNativeTarget "BattleBotJoySticksTests" */;
+			buildConfigurationList = 07E8168B2AC9684C002D1724 /* Build configuration list for PBXNativeTarget "CP BattleBotTests" */;
 			buildPhases = (
 				07E816702AC9684C002D1724 /* Sources */,
 				07E816712AC9684C002D1724 /* Frameworks */,
@@ -194,14 +197,14 @@
 			dependencies = (
 				07E816762AC9684C002D1724 /* PBXTargetDependency */,
 			);
-			name = BattleBotJoySticksTests;
+			name = "CP BattleBotTests";
 			productName = BattleBotJoySticksTests;
-			productReference = 07E816742AC9684C002D1724 /* BattleBotJoySticksTests.xctest */;
+			productReference = 07E816742AC9684C002D1724 /* CP BattleBotTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		07E8167D2AC9684C002D1724 /* BattleBotJoySticksUITests */ = {
+		07E8167D2AC9684C002D1724 /* CP BattleBotUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 07E8168E2AC9684C002D1724 /* Build configuration list for PBXNativeTarget "BattleBotJoySticksUITests" */;
+			buildConfigurationList = 07E8168E2AC9684C002D1724 /* Build configuration list for PBXNativeTarget "CP BattleBotUITests" */;
 			buildPhases = (
 				07E8167A2AC9684C002D1724 /* Sources */,
 				07E8167B2AC9684C002D1724 /* Frameworks */,
@@ -212,9 +215,9 @@
 			dependencies = (
 				07E816802AC9684C002D1724 /* PBXTargetDependency */,
 			);
-			name = BattleBotJoySticksUITests;
+			name = "CP BattleBotUITests";
 			productName = BattleBotJoySticksUITests;
-			productReference = 07E8167E2AC9684C002D1724 /* BattleBotJoySticksUITests.xctest */;
+			productReference = 07E8167E2AC9684C002D1724 /* CP BattleBotUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -240,7 +243,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 07E8165F2AC9684A002D1724 /* Build configuration list for PBXProject "BattleBotJoySticks" */;
+			buildConfigurationList = 07E8165F2AC9684A002D1724 /* Build configuration list for PBXProject "CPBattleBot" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -253,9 +256,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				07E816632AC9684A002D1724 /* BattleBotJoySticks */,
-				07E816732AC9684C002D1724 /* BattleBotJoySticksTests */,
-				07E8167D2AC9684C002D1724 /* BattleBotJoySticksUITests */,
+				07E816632AC9684A002D1724 /* CP BattleBot */,
+				07E816732AC9684C002D1724 /* CP BattleBotTests */,
+				07E8167D2AC9684C002D1724 /* CP BattleBotUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -296,7 +299,7 @@
 				895B6EC32B6068FB00D5B5D6 /* AbilityBarView.swift in Sources */,
 				07985ABE2AFCC87D007E298B /* BluetoothManager.swift in Sources */,
 				89D818642B06BCD700426437 /* JoystickModeView.swift in Sources */,
-				07E816682AC9684A002D1724 /* BattleBotJoySticksApp.swift in Sources */,
+				07E816682AC9684A002D1724 /* CPBattleBotApp.swift in Sources */,
 				895B6EC52B60720700D5B5D6 /* AbilityBarViewModel.swift in Sources */,
 				89D818602B06B48E00426437 /* GestureModeView.swift in Sources */,
 			);
@@ -306,7 +309,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				07E816792AC9684C002D1724 /* BattleBotJoySticksTests.swift in Sources */,
+				07E816792AC9684C002D1724 /* CPBattleBotTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -314,8 +317,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				07E816852AC9684C002D1724 /* BattleBotJoySticksUITestsLaunchTests.swift in Sources */,
-				07E816832AC9684C002D1724 /* BattleBotJoySticksUITests.swift in Sources */,
+				07E816852AC9684C002D1724 /* CPBattleBotUITests.swift in Sources */,
+				07E816832AC9684C002D1724 /* CPBattleBotUITestsLaunchTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -324,12 +327,12 @@
 /* Begin PBXTargetDependency section */
 		07E816762AC9684C002D1724 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 07E816632AC9684A002D1724 /* BattleBotJoySticks */;
+			target = 07E816632AC9684A002D1724 /* CP BattleBot */;
 			targetProxy = 07E816752AC9684C002D1724 /* PBXContainerItemProxy */;
 		};
 		07E816802AC9684C002D1724 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 07E816632AC9684A002D1724 /* BattleBotJoySticks */;
+			target = 07E816632AC9684A002D1724 /* CP BattleBot */;
 			targetProxy = 07E8167F2AC9684C002D1724 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -461,7 +464,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"BattleBotJoySticks/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"CPBattleBot/Preview Content\"";
 				DEVELOPMENT_TEAM = EHT5EF5CQZ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -469,8 +472,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -491,7 +493,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"BattleBotJoySticks/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"CPBattleBot/Preview Content\"";
 				DEVELOPMENT_TEAM = EHT5EF5CQZ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -499,8 +501,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -529,7 +530,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BattleBotJoySticks.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/BattleBotJoySticks";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CP BattleBot.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/CP BattleBot";
 			};
 			name = Debug;
 		};
@@ -548,7 +549,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BattleBotJoySticks.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/BattleBotJoySticks";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CP BattleBot.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/CP BattleBot";
 			};
 			name = Release;
 		};
@@ -589,7 +590,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		07E8165F2AC9684A002D1724 /* Build configuration list for PBXProject "BattleBotJoySticks" */ = {
+		07E8165F2AC9684A002D1724 /* Build configuration list for PBXProject "CPBattleBot" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				07E816862AC9684C002D1724 /* Debug */,
@@ -598,7 +599,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		07E816882AC9684C002D1724 /* Build configuration list for PBXNativeTarget "BattleBotJoySticks" */ = {
+		07E816882AC9684C002D1724 /* Build configuration list for PBXNativeTarget "CP BattleBot" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				07E816892AC9684C002D1724 /* Debug */,
@@ -607,7 +608,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		07E8168B2AC9684C002D1724 /* Build configuration list for PBXNativeTarget "BattleBotJoySticksTests" */ = {
+		07E8168B2AC9684C002D1724 /* Build configuration list for PBXNativeTarget "CP BattleBotTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				07E8168C2AC9684C002D1724 /* Debug */,
@@ -616,7 +617,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		07E8168E2AC9684C002D1724 /* Build configuration list for PBXNativeTarget "BattleBotJoySticksUITests" */ = {
+		07E8168E2AC9684C002D1724 /* Build configuration list for PBXNativeTarget "CP BattleBotUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				07E8168F2AC9684C002D1724 /* Debug */,

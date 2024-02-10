@@ -1,13 +1,13 @@
 //
-//  BattleBotJoySticksUITestsLaunchTests.swift
-//  BattleBotJoySticksUITests
+//  CPBattleBotUITestsLaunchTests.swift
+//  CPBattleBotUITests
 //
 //  Created by Aaron Rosen on 10/1/23.
 //
 
 import XCTest
 
-final class BattleBotJoySticksUITestsLaunchTests: XCTestCase {
+final class CPBattleBotUITestsLaunchTests: XCTestCase {
 
     override class var runsForEachTargetApplicationUIConfiguration: Bool {
         true

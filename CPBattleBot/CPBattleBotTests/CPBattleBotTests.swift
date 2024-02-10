@@ -1,12 +1,12 @@
 //
-//  BattleBotJoySticksTests.swift
-//  BattleBotJoySticksTests
+//  CPBattleBot.swift
+//  CPBattleBotTests
 //
 //  Created by Aaron Rosen on 10/1/23.
 //
 
 import XCTest
-@testable import BattleBotJoySticks
+@testable import CP_BattleBot
 
 final class BattleBotJoySticksTests: XCTestCase {
 

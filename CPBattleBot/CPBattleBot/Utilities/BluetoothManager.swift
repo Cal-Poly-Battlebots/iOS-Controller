@@ -22,7 +22,6 @@ class BluetoothManager: NSObject, ObservableObject, CBCentralManagerDelegate, CB
     public static let joystick_uuid = CBUUID(string: "6E400002-B5A3-F393-E0A9-E50E24DCCA9E")
     public static let swipe_uuid = CBUUID(string: "6E400003-B5A3-F393-E0A9-E50E24DCCA9E")
     public static let ability_uuid = CBUUID(string: "6E400004-B5A3-F393-E0A9-E50E24DCCA9E")
-    public static let rotation_uuid = CBUUID(string: "6E400005-B5A3-F393-E0A9-E50E24DCCA9E")
     
     
     @Published var peripheral: CBPeripheral?

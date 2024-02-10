@@ -327,9 +327,9 @@ struct JoystickModeView: View {
                     VStack(alignment: .leading) {
                         HStack {
                             VStack(alignment: .leading) {
-                                Text("Joystick 1 Angle: \(String(format: "%.2f", joystickAngle(joystickType: .left).degrees))")
+                                Text("Movement Joystick Angle: \(String(format: "%.2f", joystickAngle(joystickType: .left).degrees))")
                                     .font(.title2)
-                                Text("Joystick 1 Magnitude: \(String(format: "%.2f", joystickMagnitude(joystickType: .left)))")
+                                Text("Movement Joystick Magnitude: \(String(format: "%.2f", joystickMagnitude(joystickType: .left)))")
                                     .font(.title2)
                                 Text("")
                             }
@@ -348,9 +348,9 @@ struct JoystickModeView: View {
                         HStack {
                             Spacer()
                             VStack(alignment: .trailing) {
-                                Text("Joystick 2 Angle: \(String(format: "%.2f", joystickAngle(joystickType: .right).degrees))")
+                                Text("Rotation Joystick Angle: \(String(format: "%.2f", joystickAngle(joystickType: .right).degrees))")
                                     .font(.title2)
-                                Text("Joystick 2 Magnitude:  \(String(format: "%.2f", joystickMagnitude(joystickType: .right)))")
+                                Text("Rotation Joystick Magnitude:  \(String(format: "%.2f", joystickMagnitude(joystickType: .right)))")
                                     .font(.title2)
                             }
                         }

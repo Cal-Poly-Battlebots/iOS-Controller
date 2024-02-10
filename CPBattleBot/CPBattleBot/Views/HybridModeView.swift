@@ -133,7 +133,7 @@ struct HybridModeView: View {
                 let dataToSend2 = "\(facingAngle), 50"
                 
                 BluetoothManager.shared.sendData(dataToSend1, BluetoothManager.joystick_uuid.uuidString)
-                BluetoothManager.shared.sendData(dataToSend2, BluetoothManager.rotation_uuid.uuidString)
+                BluetoothManager.shared.sendData(dataToSend2, BluetoothManager.swipe_uuid.uuidString)
                 
             }
         }
