@@ -14,11 +14,10 @@
 		07E816792AC9684C002D1724 /* CPBattleBotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E816782AC9684C002D1724 /* CPBattleBotTests.swift */; };
 		07E816832AC9684C002D1724 /* CPBattleBotUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E816822AC9684C002D1724 /* CPBattleBotUITestsLaunchTests.swift */; };
 		07E816852AC9684C002D1724 /* CPBattleBotUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E816842AC9684C002D1724 /* CPBattleBotUITests.swift */; };
-		895B6EC32B6068FB00D5B5D6 /* AbilityBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895B6EC22B6068FB00D5B5D6 /* AbilityBarView.swift */; };
-		895B6EC52B60720700D5B5D6 /* AbilityBarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895B6EC42B60720700D5B5D6 /* AbilityBarViewModel.swift */; };
-		897F67A62B6993700005CA75 /* HybridModeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897F67A52B6993700005CA75 /* HybridModeView.swift */; };
-		89D8185E2B06B43E00426437 /* ModeSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D8185D2B06B43E00426437 /* ModeSelectorView.swift */; };
-		89D818602B06B48E00426437 /* GestureModeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D8185F2B06B48E00426437 /* GestureModeView.swift */; };
+		89A31F412B8E8B9000C58A8D /* MovementJoystick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A31F3E2B8E8B9000C58A8D /* MovementJoystick.swift */; };
+		89A31F422B8E8B9000C58A8D /* RotationJoystick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A31F3F2B8E8B9000C58A8D /* RotationJoystick.swift */; };
+		89A31F432B8E8B9000C58A8D /* ButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A31F402B8E8B9000C58A8D /* ButtonView.swift */; };
+		89A31F452B8E8B9900C58A8D /* ButtonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A31F442B8E8B9900C58A8D /* ButtonViewModel.swift */; };
 		89D818642B06BCD700426437 /* JoystickModeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D818632B06BCD700426437 /* JoystickModeView.swift */; };
 /* End PBXBuildFile section */
 
@@ -50,11 +49,10 @@
 		07E8167E2AC9684C002D1724 /* CP BattleBotUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "CP BattleBotUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		07E816822AC9684C002D1724 /* CPBattleBotUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CPBattleBotUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		07E816842AC9684C002D1724 /* CPBattleBotUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CPBattleBotUITests.swift; sourceTree = "<group>"; };
-		895B6EC22B6068FB00D5B5D6 /* AbilityBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbilityBarView.swift; sourceTree = "<group>"; };
-		895B6EC42B60720700D5B5D6 /* AbilityBarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbilityBarViewModel.swift; sourceTree = "<group>"; };
-		897F67A52B6993700005CA75 /* HybridModeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HybridModeView.swift; sourceTree = "<group>"; };
-		89D8185D2B06B43E00426437 /* ModeSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModeSelectorView.swift; sourceTree = "<group>"; };
-		89D8185F2B06B48E00426437 /* GestureModeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GestureModeView.swift; sourceTree = "<group>"; };
+		89A31F3E2B8E8B9000C58A8D /* MovementJoystick.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovementJoystick.swift; sourceTree = "<group>"; };
+		89A31F3F2B8E8B9000C58A8D /* RotationJoystick.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RotationJoystick.swift; sourceTree = "<group>"; };
+		89A31F402B8E8B9000C58A8D /* ButtonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonView.swift; sourceTree = "<group>"; };
+		89A31F442B8E8B9900C58A8D /* ButtonViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonViewModel.swift; sourceTree = "<group>"; };
 		89D818632B06BCD700426437 /* JoystickModeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoystickModeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -144,8 +142,8 @@
 		895B6EC62B60722D00D5B5D6 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				89A31F442B8E8B9900C58A8D /* ButtonViewModel.swift */,
 				07985ABD2AFCC87D007E298B /* BluetoothManager.swift */,
-				895B6EC42B60720700D5B5D6 /* AbilityBarViewModel.swift */,
 			);
 			name = Utilities;
 			path = CPBattleBot/Utilities;
@@ -154,11 +152,10 @@
 		89D8186B2B06C91400426437 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				89D8185F2B06B48E00426437 /* GestureModeView.swift */,
-				89D8185D2B06B43E00426437 /* ModeSelectorView.swift */,
+				89A31F402B8E8B9000C58A8D /* ButtonView.swift */,
+				89A31F3E2B8E8B9000C58A8D /* MovementJoystick.swift */,
+				89A31F3F2B8E8B9000C58A8D /* RotationJoystick.swift */,
 				89D818632B06BCD700426437 /* JoystickModeView.swift */,
-				895B6EC22B6068FB00D5B5D6 /* AbilityBarView.swift */,
-				897F67A52B6993700005CA75 /* HybridModeView.swift */,
 			);
 			name = Views;
 			path = CPBattleBot/Views;
@@ -294,14 +291,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				89D8185E2B06B43E00426437 /* ModeSelectorView.swift in Sources */,
-				897F67A62B6993700005CA75 /* HybridModeView.swift in Sources */,
-				895B6EC32B6068FB00D5B5D6 /* AbilityBarView.swift in Sources */,
+				89A31F412B8E8B9000C58A8D /* MovementJoystick.swift in Sources */,
+				89A31F422B8E8B9000C58A8D /* RotationJoystick.swift in Sources */,
+				89A31F432B8E8B9000C58A8D /* ButtonView.swift in Sources */,
 				07985ABE2AFCC87D007E298B /* BluetoothManager.swift in Sources */,
 				89D818642B06BCD700426437 /* JoystickModeView.swift in Sources */,
 				07E816682AC9684A002D1724 /* CPBattleBotApp.swift in Sources */,
-				895B6EC52B60720700D5B5D6 /* AbilityBarViewModel.swift in Sources */,
-				89D818602B06B48E00426437 /* GestureModeView.swift in Sources */,
+				89A31F452B8E8B9900C58A8D /* ButtonViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

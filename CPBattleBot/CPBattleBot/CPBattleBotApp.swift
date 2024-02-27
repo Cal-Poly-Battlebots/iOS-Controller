@@ -10,9 +10,11 @@ import SwiftUI
 
 @main
 struct CPBattleBotApp: App {
+    let buttonViewModel = ButtonViewModel()
+    
     var body: some Scene {
         WindowGroup {
-            ModeSelectorView()
+            JoystickModeView(buttons: buttonViewModel)
         }
     }
 }
