@@ -12,6 +12,51 @@ There is a button ability bar that could be used for turning on/off weapons, kil
 There is a mode switch button bar to switch between the modes which was in development
 (originally a joystick mode, gesture-based mode, and a hybrid mode combining both joystick and gesture mode).
 
+## Usage
+![App](/Documentation/CPBattleBots-App.png "App")
+### 1. Connection Status
+Ensure that the iOS device has bluetooth enabled and that it is connected to the device "ESP32_BLE".
+If the device is not connected and cannot be found in settings, install the [Bluefruit Connect](https://apps.apple.com/us/app/bluefruit-connect/id830125974) app to search for Bluetooth devices around you.
+
+Possible connection statuses are:
+
+1. CONNECTED
+
+2. DISCONNECTED
+
+3. SEARCHING
+
+4. CONNECTING
+
+5. ERROR
+
+### 2. Movement Joystick
+This joystick handles translation of the bot. 
+Above the joystick are the magnitude and angle measured values of the joystick from the zero origin.
+The max magnitude is a value of 50.
+Moving the bot foward has a joystick angle of 0/360 degrees.
+Moving the bot backwards has a joystick angle of 180 degrees.
+Moving the bot to the right has a joystick angle of 90 degrees.
+Moving the bot to the left has a joystick angle of 270 degrees.
+
+### 3. Rotation Joystick
+This joystick handles rotation of the bot. 
+Above the joystick are the magnitude measured value and rotation direction of the joystick from the zero origin.
+The max magnitude is a value of 50.
+The rotation directions are either clockwise, counterclockwise, or no rotation
+
+### 4. Buttons
+There are 3 buttons at the bottom of the screen: Weapon, Field Orientation, Power
+
+#### Weapon
+This button turns the weapon on or off. At default, the weapon is off.
+
+#### Field Orientation
+This button enables or disables field orientation controls. At default, field orientated controls is enabled.
+
+#### Power
+This button powers off the bot. At defualt, the bot is powered on.
+
 ## Documentation
 ### View Class
 ![View-Class](/Documentation/CPBattleBots-ViewClass.png "View Class")
