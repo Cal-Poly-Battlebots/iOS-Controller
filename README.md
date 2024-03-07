@@ -77,23 +77,22 @@ This button powers off the bot. At defualt, the bot is powered on.
 
 ## Documentation
 ### iOS App Flowchart
-___
 ![App-Flowchart](/Documentation/AppFlowchart.png "App Flowchart")
 This is a flowchart of how the overall iOS app functions. 
 The main view window has separate movement joystick, rotation joystick, and button components.
 It will then calculate the joystick angle and magnitude and send that data to back to the main view window and to Bluetooth Manager.
 Bluetooth Manager will send the Bluetooth connection status to the main view window.
 
-### View Class
 ---
+### View Class
 ![View-Class](/Documentation/CPBattleBots-ViewClass.png "View Class")
 This is the UML documentation of the View class. 
 The View class represents part of th user app interface with the main View being JoystickModeView.
 JoystickModeView utilizes MovementJoystickView, RotationJoystickView, and ButtonView for the main view.
 Both MovementJoystickView and RotationJoystickView call the Dash view for the outline of the maximum range of the joystick.
 
-### BluetoothManager Class
 ---
+### BluetoothManager Class
 ![BluetoothManager-Class](/Documentation/CPBattleBots-BluetoothManagerClass.png "BluetoothManager Class")
 This is the UML documentation of the BluetoothManager class. 
 The BluetoothManager class uses the Core Bluetooth framework to communicate with Bluetooth Low Energy devices.
@@ -110,8 +109,8 @@ If it finds it, it will look for the characteristics of the service UUID and the
 If the connection fails, it will check if either there was a disconnect or it failed to connect.
 From there it will start a reconnection timer and start the scan for Bluetooth peripherals again.
 
-### PreviewProvider Class
 ---
+### PreviewProvider Class
 ![PreviewProvider-Class](/Documentation/CPBattleBots-PreviewProviderClass.png "PreviewProvider Class")
 This is the UML documentation of the PreviewProvider class.
 The PreviewProvider class produces View previews of a given class in Xcode
