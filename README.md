@@ -20,13 +20,14 @@ On the top center of the screen in the toolbar, select the iOS device to build t
 By default, it should build onto "Any iOS Device (arm64)".
 On the top left, select the Run button in the toolbar to "Start the active scheme".
 The application should now be installed on the iOS device.
-More information about running the app on an iOS device is available [here](https://developer.apple.com/documentation/xcode/running-your-app-in-simulator-or-on-a-device)
 
+More information about running the app on an iOS device is available [here](https://developer.apple.com/documentation/xcode/running-your-app-in-simulator-or-on-a-device)
 
 ### IMPORTANT:
 Regular Apple user accounts can sign an application onto their device for 7 days. 
 After 7 days, the app needs to be rebuilt onto the iOS device from Xcode.
 Apple Developer accounts in the Apple Developer Program can have builds remain active for 90 days after install. 
+
 More information about the Apple Developer Program is available [here](https://developer.apple.com/programs/).
 
 ## Usage
@@ -75,11 +76,29 @@ This button enables or disables field orientation controls. At default, field or
 This button powers off the bot. At defualt, the bot is powered on.
 
 ## Documentation
+### iOS App Flowchart
+___
 ![App-Flowchart](/Documentation/AppFlowchart.png "App Flowchart")
 This is a flowchart of how the overall iOS app functions. 
 The main view window has separate movement joystick, rotation joystick, and button components.
 It will then calculate the joystick angle and magnitude and send that data to back to the main view window and to Bluetooth Manager.
 Bluetooth Manager will send the Bluetooth connection status to the main view window.
+
+### View Class
+---
+![View-Class](/Documentation/CPBattleBots-ViewClass.png "View Class")
+This is the UML documentation of the View class. 
+The View class represents part of th user app interface with the main View being JoystickModeView.
+JoystickModeView utilizes MovementJoystickView, RotationJoystickView, and ButtonView for the main view.
+Both MovementJoystickView and RotationJoystickView call the Dash view for the outline of the maximum range of the joystick.
+
+### BluetoothManager Class
+---
+![BluetoothManager-Class](/Documentation/CPBattleBots-BluetoothManagerClass.png "BluetoothManager Class")
+This is the UML documentation of the BluetoothManager class. 
+The BluetoothManager class uses the Core Bluetooth framework to communicate with Bluetooth Low Energy devices.
+BluetoothManager has two extensions for the CBPeripheralDelegate protocol and the CBCentralManagerDelegate protocol.
+In order for the app to build on your system, modify the Info.plist file with the NSBluetoothAlwaysUsageDescription with description keys for the types of data it needs to access in order to access the Core Bluetooth APIs.
 
 ![BluetoothManager-Flowchart](/Documentation/BluetoothManagerFlowchart.png "BluetoothManager Flowchart")
 This is a flowchart of how the Bluetooth Manager functions. 
@@ -90,23 +109,12 @@ After connecting it will try to find the Bluetooth service UUID.
 If it finds it, it will look for the characteristics of the service UUID and then send joystick and button data to their respective characteristic UUID.
 If the connection fails, it will check if either there was a disconnect or it failed to connect.
 From there it will start a reconnection timer and start the scan for Bluetooth peripherals again.
-### View Class
-![View-Class](/Documentation/CPBattleBots-ViewClass.png "View Class")
-This is the UML documentation of the View class. 
-The View class represents part of th user app interface with the main View being JoystickModeView.
-JoystickModeView utilizes MovementJoystickView, RotationJoystickView, and ButtonView for the main view.
-Both MovementJoystickView and RotationJoystickView call the Dash view for the outline of the maximum range of the joystick.
-
-### BluetoothManager Class
-![BluetoothManager-Class](/Documentation/CPBattleBots-BluetoothManagerClass.png "BluetoothManager Class")
-This is the UML documentation of the BluetoothManager class. 
-The BluetoothManager class uses the Core Bluetooth framework to communicate with Bluetooth Low Energy devices.
-BluetoothManager has two extensions for the CBPeripheralDelegate protocol and the CBCentralManagerDelegate protocol.
-In order for the app to build on your system, modify the Info.plist file with the NSBluetoothAlwaysUsageDescription with description keys for the types of data it needs to access in order to access the Core Bluetooth APIs.
 
 ### PreviewProvider Class
+---
 ![PreviewProvider-Class](/Documentation/CPBattleBots-PreviewProviderClass.png "PreviewProvider Class")
 This is the UML documentation of the PreviewProvider class.
 The PreviewProvider class produces View previews of a given class in Xcode
 
+---
 ### Written in SwiftUI using Xcode for MacOS
