@@ -99,6 +99,7 @@ The BluetoothManager class uses the Core Bluetooth framework to communicate with
 BluetoothManager has two extensions for the CBPeripheralDelegate protocol and the CBCentralManagerDelegate protocol.
 In order for the app to build on your system, modify the Info.plist file with the NSBluetoothAlwaysUsageDescription with description keys for the types of data it needs to access in order to access the Core Bluetooth APIs.
 
+
 ![BluetoothManager-Flowchart](/Documentation/BluetoothManagerFlowchart.png "BluetoothManager Flowchart")
 This is a flowchart of how the Bluetooth Manager functions. 
 First it will check if the Bluetooth is enabled for the iOS device.
