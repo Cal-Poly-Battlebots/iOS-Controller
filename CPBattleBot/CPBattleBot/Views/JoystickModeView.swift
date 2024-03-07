@@ -16,13 +16,11 @@ enum JoystickType {
 }
 
 struct JoystickModeView: View {
+    // The main content view window struct of the app
     @State private var timer: Timer?
-
     @State private var joystickPositionL: CGPoint = .zero
     @State private var joystickPositionR: CGPoint = .zero
-    
     @ObservedObject var buttons: ButtonViewModel
-    
     @StateObject var bluetoothManager = BluetoothManager.shared
     
 
@@ -140,6 +138,7 @@ struct JoystickModeView: View {
     }
 
     private func joystickAngle(joystickType: JoystickType) -> Angle {
+        // Determine the joystick angle based on the joystick type
         let joystickPosition: CGPoint
         
         // Check if it is the right joystick (rotation) or left joystick (movement)
@@ -167,6 +166,7 @@ struct JoystickModeView: View {
     }
 
     private func joystickMagnitude(joystickType: JoystickType) -> CGFloat {
+        // Determine the joystick magnitude based on the joystick type
         let joystickPosition: CGPoint
         
         // Check if it is the right joystick (rotation) or left joystick (movement)

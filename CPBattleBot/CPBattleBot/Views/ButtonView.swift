@@ -9,6 +9,7 @@ import SwiftUI
 
 
 struct ButtonView: View {
+    // Create a the Button View bar expecting 3 buttons (Weapon, Field Orientation, Power)
     @Binding var button: [Bool]
 
     var body: some View {

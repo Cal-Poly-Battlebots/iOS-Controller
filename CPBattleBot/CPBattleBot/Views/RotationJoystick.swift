@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct RotationJoystickView: View {
+    // Structure for the Rotation Joystick
     @Binding var joystickPosition: CGPoint
 
     var body: some View {
@@ -54,9 +55,11 @@ struct RotationJoystickView: View {
     }
 
     private func updateJoystickPosition(_ newPosition: CGPoint) {
+        // Update the Joystick position based on a new position
         let distance = abs(newPosition.x)
         let maxDistance: CGFloat = 150 // Maximum range
 
+        // Limit the range to the max distance that can be pulled in the x direction
         if distance <= maxDistance {
             joystickPosition = newPosition
         } else {

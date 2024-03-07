@@ -54,7 +54,8 @@ class BluetoothManager: NSObject, ObservableObject
     // Start scanning for peripherals
     func scanForPeripherals() {
         peripheralStatus = .searching
-        centralManager.scanForPeripherals(withServices: nil)
+//        centralManager.scanForPeripherals(withServices: [service_uuid])
+         centralManager.scanForPeripherals(withServices: nil)
     }
     
     // Send data over Bluetooth to a specific characteristic
@@ -146,8 +147,7 @@ extension BluetoothManager: CBCentralManagerDelegate {
         // Start the reconnect timer when disconnected
         startReconnectTimer()
     }
-    
-    // Called when a peripheral fails to connect
+// Called when a peripheral fails to connect
     func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
         peripheralStatus = .error
         print(error?.localizedDescription ?? "no error")
@@ -181,116 +181,3 @@ extension BluetoothManager: CBPeripheralDelegate {
     }
 }
 
-
-
-//class BluetoothManager: NSObject, ObservableObject{
-//    
-//    private var centralManager: CBCentralManager!
-//    private var espPeripheral: CBPeripheral?
-//    @Published var peripheralStatus: ConnectionStatus = .disconnected
-//    
-//    override init() {
-//        super.init()
-//        centralManager = CBCentralManager(delegate: self, queue: nil)
-//    }
-//    
-//    func scanForPeripherals() {
-//        peripheralStatus = .searching
-//        // Scan for peripherals with service uuid
-//        centralManager.scanForPeripherals(withServices: nil)
-//    }
-//    
-//    func sendData(_ data: String, _ charUUID: String) {
-//        guard let peripheral = espPeripheral else {
-//            print("Peripheral not connected")
-//            return
-//        }
-//        
-//        guard let service = peripheral.services?.first(where: { $0.uuid == service_uuid }) else {
-//            print("Service not found")
-//            return
-//        }
-//        
-//        guard let characteristic = service.characteristics?.first(where: { $0.uuid.uuidString == charUUID }) else {
-//            print("Characteristic not found")
-//            return
-//        }
-//        
-//        // Convert the data to Data type
-//        if let dataToSend = data.data(using: .utf8) {
-//            // Write the data to the characteristic
-//            peripheral.writeValue(dataToSend, for: characteristic, type: .withoutResponse)
-//        } else {
-//            print("Failed to convert data to Data type")
-//        }
-//    }
-//
-//}
-//
-//extension BluetoothManager: CBCentralManagerDelegate {
-//    func centralManagerDidUpdateState(_ central: CBCentralManager) {
-//        if central.state == .poweredOn {
-//            // Bluetooth is on. Start scanning for peripherals
-//            print("Bluetooth On")
-//            scanForPeripherals()
-//        }
-//    }
-//    
-//    func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
-//        if peripheral.name?.hasPrefix(peripheralName) ?? false {
-//            print("Discovered \(peripheral.name ?? "unknown device")")
-//            espPeripheral = peripheral
-//            centralManager.connect(peripheral)
-//            peripheralStatus = .connecting
-//        }
-//    }
-//    
-//    func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
-//        peripheralStatus = .connected
-//        print("Connected to \(peripheral.name ?? "unknown device")")
-//        
-//        // Scan for characteristics available for us
-//        peripheral.delegate = self
-//        peripheral.discoverServices([service_uuid]) // When services discovered, notify delegate
-//        centralManager.stopScan()
-//    }
-//    
-//    func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
-//        peripheralStatus = .disconnected
-//    }
-//    
-//    func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
-//        peripheralStatus = .error
-//        print(error?.localizedDescription ?? "no error")
-//    }
-//    
-//}
-//
-//extension BluetoothManager: CBPeripheralDelegate {
-//    func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
-//        
-//        // Loop through and find service we are looking for
-//        for service in peripheral.services ?? [] 
-//        {
-//            if service.uuid == service_uuid 
-//            {
-//                print("Found service for \(service_uuid)")
-//                peripheral.discoverCharacteristics([joystick_uuid, swipe_uuid, ability_uuid], for: service)
-//            }
-//        }
-//    }
-//    
-//    func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
-//        for characteristic in service.characteristics ?? [] {
-////            peripheral.setNotifyValue(true, for: characteristic)
-//            if characteristic.uuid == joystick_uuid {
-//                print("Joystick characteristic discovered")
-//            } else if characteristic.uuid == swipe_uuid {
-//                print("Swipe characteristic discovered")
-//            } else if characteristic.uuid == ability_uuid {
-//                print("Ability characteristic discovered")
-//            }
-//        }
-//    }
-//    
-//}
