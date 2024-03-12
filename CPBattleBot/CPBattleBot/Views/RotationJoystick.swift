@@ -1,9 +1,7 @@
 //
 //  RotationJoystick.swift
 //  CP BattleBot
-//
-//  Created by Aaron Rosen on 10/1/23.
-//  Modified by Kieran Valino
+
 
 import SwiftUI
 

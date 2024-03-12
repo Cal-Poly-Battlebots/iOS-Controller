@@ -1,9 +1,7 @@
 //
 //  MovementJoystick.swift
 //  CP BattleBot
-//
-//  Created by Aaron Rosen on 10/1/23.
-//  Modified by Kieran Valino
+
 
 import SwiftUI
 
@@ -52,10 +50,13 @@ struct MovementJoystickView: View {
                         // Reset the joystick position when dragging ends
                         joystickPosition = .zero
                     }
-            )
+
+                )
+            
             
         }
         .frame(width: 30, height: 30)
+
     }
 
     private func updateJoystickPosition(_ newPosition: CGPoint) {

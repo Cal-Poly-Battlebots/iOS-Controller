@@ -67,13 +67,23 @@ The rotation directions are either clockwise, counterclockwise, or no rotation
 There are 3 buttons at the bottom of the screen: Weapon, Field Orientation, Power
 
 #### Weapon
-This button turns the weapon on or off. At default, the weapon is off.
+This button turns the weapon on or off. At default, the weapon is off (gray).
 
 #### Field Orientation
-This button enables or disables field orientation controls. At default, field orientated controls is enabled.
+This button enables or disables field orientation controls. 
+Field orientation enabled moves the bot based on the direction of the bot on startup. 
+Field orientation disabled moves the bot based on the current relative direction of the bot.
+At default, field orientated controls is enabled (green).
 
 #### Power
-This button powers off the bot. At defualt, the bot is powered on.
+This button powers off the bot. At defualt, the bot is powered on (green).
+
+### 5. Field Orientation Slider
+This slider adjusts the field orientation by providing an offset to the direction angle of the Movement Joystick.
+Sliding to the right adds a field orientation offset in a clockwise direction.
+Sliding to the left adds a field orientation offset in a counterclockwise direction.
+Underneath the field orientation slider is a button to reset the field orientation back to zero.
+This slider only affects the angle of the bot when the Field Orientation Button is turned on.
 
 ## Documentation
 ### iOS App Flowchart

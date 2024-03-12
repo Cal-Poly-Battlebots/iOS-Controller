@@ -1,9 +1,6 @@
 //
 //  JoyStickModeView.swift
 //  CP BattleBot
-//
-//  Created by Aaron Rosen on 10/1/23.
-//  Modified by Kieran Valino
 
 
 
@@ -20,6 +17,7 @@ struct JoystickModeView: View {
     @State private var timer: Timer?
     @State private var joystickPositionL: CGPoint = .zero
     @State private var joystickPositionR: CGPoint = .zero
+    @State var fieldOrientationOffset: Double = 0
     @ObservedObject var buttons: ButtonViewModel
     @StateObject var bluetoothManager = BluetoothManager.shared
     
@@ -50,14 +48,14 @@ struct JoystickModeView: View {
                             }
                         }
                         // Print Movement joystick
-                        Spacer(minLength: 350.0)
+                        Spacer(minLength: 300.0)
                         MovementJoystickView(joystickPosition: $joystickPositionL)
                             .frame(width: 100, height: 100)
-                            .padding([.leading, .trailing], safeAreaBorder + 150)
+                            .padding([.leading, .trailing], safeAreaBorder + 100)
                         Spacer()
                     }
                     // Add some padding on left and right of view
-                    .padding([.leading, .trailing], safeAreaBorder)
+                    .padding(.leading, safeAreaBorder)
                     
                     // Right half (rotation)
                     VStack(alignment: .trailing) {
@@ -75,20 +73,43 @@ struct JoystickModeView: View {
                                     .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                             }
                         }
-                        Spacer(minLength: 350.0)
+                        Spacer(minLength: 300.0)
                         // Print Rotation joystick
                         RotationJoystickView(joystickPosition: $joystickPositionR)
                             .frame(width: 100, height: 100)
-                            .padding([.leading, .trailing], safeAreaBorder + 150)
+                            .padding([.leading, .trailing], safeAreaBorder + 120)
                         Spacer()
                     }
                     // Add some padding on left and right of view
-                    .padding([.leading, .trailing], safeAreaBorder)
+                    .padding(.trailing, safeAreaBorder)
                 }
                 
-                // Print Button view at the bottom of the screen
-                ButtonView(button: $buttons.inputButtons)
-                    .padding(.bottom, 50)
+
+                // Vertical stack for items at the bottom of the screen
+                VStack {
+                    
+                    // Field orientation offset slider
+                    Text("Field Orientation Offset")
+                        .font(.title3)
+                        .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                        .foregroundStyle(.black)
+                    Text("Offset: \(String(format: "%.2f", fieldOrientationOffset))")
+                    Slider(value: $fieldOrientationOffset, in: -180...180, step: 1)
+                        .tint(Color.green)
+                        .padding(.horizontal, safeAreaBorder + (UIScreen.main.bounds.width / 4))
+                        .padding(.bottom, 5)
+                    // Reset button to set field orientation offset back to zero
+                    Button("Reset") {
+                        self.fieldOrientationOffset = 0
+                    }
+                    .padding(.bottom, 40)
+                    .fontWeight(.bold)
+                    
+                    // Button View with weapon, field orientation offset, and power buttons
+                    ButtonView(button: $buttons.inputButtons)
+                        .padding(.bottom, safeAreaBorder + 30)
+                }
+
                 
 
             }
@@ -110,11 +131,17 @@ struct JoystickModeView: View {
         // Start a timer to regularly send data over Bluetooth
         Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { _ in
             // Convert angles to degrees and send over Bluetooth
-            let joyAngleLeft = joystickAngle(joystickType: .left).degrees
-            let joyMagLeft = joystickMagnitude(joystickType: .left)
-            
             let joyAngleRight = joystickAngle(joystickType: .right).degrees
             let joyMagRight = joystickMagnitude(joystickType: .right)
+            
+            var joyAngleLeft = joystickAngle(joystickType: .left).degrees
+            let joyMagLeft = joystickMagnitude(joystickType: .left)
+            
+            // If there is a field orienation offset, ensure that the bot is sending an angle of 0 when the magnitude is near 0.
+            if (joyMagLeft < 1)
+            {
+                joyAngleLeft = 0
+            }
             
             // Format the data to send (Data1 = Movement UUID, Data2 = Rotation UUID)
             let moveData = "\(joyAngleLeft),\(joyMagLeft)"
@@ -152,12 +179,20 @@ struct JoystickModeView: View {
         // Calculate angle
         var angle = atan2(joystickPosition.y, joystickPosition.x)
         angle += .pi / 2
+        
+        if (buttons.inputButtons[1])
+        {
+            let offsetRadians = fieldOrientationOffset * (.pi/180)
+            angle = angle + offsetRadians
+        }
 
         // Limit angle from 0 to 2pi
         if angle < 0 {
             angle += 2 * .pi
         }
-        if joystickMagnitude(joystickType: joystickType) < 2 {
+        
+        // Ensure that the bot is sending an angle of 0 when the magnitude is near 0
+        if joystickMagnitude(joystickType: joystickType) < 1 {
             angle = 0
         }
         
