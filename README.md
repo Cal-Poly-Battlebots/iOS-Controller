@@ -14,12 +14,15 @@ There is a mode switch button bar to switch between the modes which was in devel
 
 ## Installation
 Make sure your iOS device has Developer Mode enabled under Settings -> Privacy & Security -> Developer Mode.
-Also ensure that your Apple ID is specified in the Account preferences in Xcode and that a valid team is specifed in the project's project’s Signing & Capabilities pane.
+In Xcode, ensure that your Apple ID is specified in the Account preferences and that a valid team is specified in the project's Signing & Capabilities pane.
 Connect the iOS device to a MacBook with Xcode installed with the iOS device on and unlocked.
-On the top center of the screen in the toolbar, select the iOS device to build the application onto. 
+On the top center of the screen in the toolbar, select the iOS device to build the application. 
 By default, it should build onto "Any iOS Device (arm64)".
+Wait a bit for Xcode to copy shared cache symbols if connecting Xcode to a new, previously unknown iOS device.
 On the top left, select the Run button in the toolbar to "Start the active scheme".
 The application should now be installed on the iOS device.
+You may need to reinstall the application again in order to verify the Apple Developer account on the iOS device.
+Verifying the Apple Developer account on the iOS device can be found under Settings -> General -> VPN & Device Management.
 
 More information about running the app on an iOS device is available [here](https://developer.apple.com/documentation/xcode/running-your-app-in-simulator-or-on-a-device)
 
@@ -28,7 +31,7 @@ Regular Apple user accounts can sign an application onto their device for 7 days
 After 7 days, the app needs to be rebuilt onto the iOS device from Xcode.
 Apple Developer accounts in the Apple Developer Program can have builds remain active for 90 days after install. 
 
-More information about the Apple Developer Program is available [here](https://developer.apple.com/programs/).
+More information about the Apple Developer Program is available [here](https://developer.apple.com/programs/whats-included/).
 
 ## Usage
 ![App](/Documentation/CPBattleBots-App.png "App")
@@ -49,16 +52,16 @@ Possible connection statuses are:
 5. ERROR
 
 ### 2. Movement Joystick
-This joystick on the left side of the scren handles translation of the bot. 
+This joystick on the left side of the screen the handles translation of the bot. 
 Above the joystick are the magnitude and angle measured values of the joystick from the zero origin.
 The max magnitude is a value of 50.
-Moving the bot foward has a joystick angle of 0/360 degrees.
+Moving the bot forward has a joystick angle of 0/360 degrees.
 Moving the bot backwards has a joystick angle of 180 degrees.
 Moving the bot to the right has a joystick angle of 90 degrees.
 Moving the bot to the left has a joystick angle of 270 degrees.
 
 ### 3. Rotation Joystick
-This joystick on the right side of the screenhandles rotation of the bot. 
+This joystick on the right side of the screen handles rotation of the bot. 
 Above the joystick are the magnitude measured value and rotation direction of the joystick from the zero origin.
 The max magnitude is a value of 50.
 The rotation directions are either clockwise, counterclockwise, or no rotation
@@ -76,7 +79,7 @@ Field orientation disabled moves the bot based on the current relative direction
 At default, field orientated controls is enabled (green).
 
 #### Power
-This button powers off the bot. At defualt, the bot is powered on (green).
+This button powers off the bot. At default, the bot is powered on (green).
 
 ### 5. Field Orientation Slider
 This slider adjusts the field orientation by providing an offset to the direction angle of the Movement Joystick.
